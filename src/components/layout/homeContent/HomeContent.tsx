@@ -4,7 +4,7 @@ import mem from '../../../assets/images/mem.jpg';
 import Button from '../../UI/button/Button';
 import BenefitsList from './benefitsList/BenefitsList';
 
-export default function HomeContent() {
+const HomeContent = () => {
   return (
     <section className={cl.container}>
       <img className={cl.mem} src={mem} alt="mem"/>
@@ -17,3 +17,5 @@ export default function HomeContent() {
     </section>
   );
 }
+
+export default HomeContent;

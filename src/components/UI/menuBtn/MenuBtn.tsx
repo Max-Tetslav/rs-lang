@@ -1,7 +1,7 @@
 import React from 'react';
 import cl from './MenuBtn.module.scss';
 
-export default function MenuBtn(){
+const MenuBtn = () => {
   return (
     <div className={cl.container}>
       <div className={[cl.burger, cl.burger2].join(' ')}>
@@ -11,3 +11,5 @@ export default function MenuBtn(){
     
   );
 }
+
+export default MenuBtn;

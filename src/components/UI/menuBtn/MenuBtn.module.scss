@@ -14,11 +14,18 @@
   background:transparent;
   position:relative;
   cursor:pointer;
+  transition: all 0.3s ease;
 
   &:focus {
     outline:none;
   }
+
   &.burger2 {
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
     &:after,
     &:before,
     span {
@@ -27,28 +34,32 @@
       border-radius:100px;
       position:absolute;
       display:block;
-      background:#ffffff;
-
+      background-color:#ffffff;
     }
+
     &:after,
     &:before {
       content:"";
       transition: 0.3s width 0.4s;
     }
+
     &:after {
       top:0px;
       left:0px;
       margin-top:0px;
     }
+
     &:before {
       bottom:0px;
       right:0px;
       margin-bottom:0px;
     }
+
     span {
       top:50%;
       margin-top:-2px;
       transition: transform 0.3s ;
+
         &:before {
           content:"";
           background:#ffffff;
@@ -59,26 +70,34 @@
           left:0px;
           transition: transform 0.3s ;
         }
+
     }
+
     &.on {
+
       &:after {
         transition: all 0.2s;
         width:0%;
         left:0px;
       }
+
       &:before {
         transition: all 0.2s;
         width:0%;
         right:0px;
       }
+
       span {
         transform:rotate(45deg);
         transition: 0.3s transform 0.4s ;
+
         &:before {
           transform:rotate(-90deg);
           transition: 0.3s transform 0.4s ;
         }
       }
+
     }
+
   }
 }
