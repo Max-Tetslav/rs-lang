@@ -1,0 +1,23 @@
+.card{
+  width: 250px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 30px;
+  padding: 20px;
+  border: 1px solid #007bff;
+  text-align: center;
+}
+
+.titleContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.img{
+  width: 40px;
+}
