@@ -1,0 +1,24 @@
+.menuItem{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  padding: 10px;
+  list-style: none;
+  transition: all 0.5s ease;
+
+  &:hover{
+    background-color: #90caf9;;
+
+    .icon{
+      transform: scale(0.95);
+    }
+  }
+}
+
+.icon{
+  width: 40px;
+  height: 40px;
+  transition: all 0.3s ease;
+}
