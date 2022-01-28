@@ -1,10 +1,10 @@
 import React from 'react';
 import BenefitCard from '../../../UI/benefitCard/BenefitCard';
 import cl from './BenefitsList.module.scss';
-import heartSvg from '../../../../assets/heart.svg';
-import stonksSvg from '../../../../assets/stonks.svg';
-import studentSvg from '../../../../assets/student.svg';
-import gameSvg from '../../../../assets/game.svg';
+import heartSvg from '../../../../assets/svg/heart.svg';
+import stonksSvg from '../../../../assets/svg/stonks.svg';
+import studentSvg from '../../../../assets/svg/student.svg';
+import gameSvg from '../../../../assets/svg/game.svg';
 
 export default function BenefitsList() {
   return (
