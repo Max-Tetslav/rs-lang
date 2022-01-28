@@ -1,0 +1,24 @@
+.container{
+  display: flex;
+  background-color: white;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 90%;
+}
+
+.mem{
+  width: 600px;
+  border: 2px solid #007bff;
+  border-radius: 40px;
+}
+
+.infoContainer{
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.benefitsContainer {
+
+}
