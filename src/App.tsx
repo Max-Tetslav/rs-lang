@@ -1,16 +1,28 @@
-import React, { Fragment } from 'react';
-import { Outlet } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import Header from './components/layout/header/Header';
-import Menu from './components/layout/menu/Menu';
+import Book from './views/book/Book';
+import Games from './views/games/Games';
+import Homepage from './views/homepage/Homepage';
+import NotFound from './views/notFound/NotFound';
+import Root from './views/Root';
+import Stats from './views/stats/Stats';
+import Team from './views/team/Team';
 
-const App = () => {
+function App(): JSX.Element {
   return (
-    <Fragment>
-      <Menu/>
-      <Header title='Главная'/>
-      <Outlet/>
-    </Fragment>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Root />}>
+          <Route path="/" element={<Homepage />} />
+          <Route path="book" element={<Book />} />
+          <Route path="games" element={<Games />} />
+          <Route path="stats" element={<Stats />} />
+          <Route path="team" element={<Team />} />
+        </Route>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
