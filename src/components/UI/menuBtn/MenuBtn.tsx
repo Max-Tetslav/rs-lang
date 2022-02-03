@@ -1,14 +1,13 @@
 import React from 'react';
 import cl from './MenuBtn.module.scss';
 
-const MenuBtn = () => {
+function MenuBtn(): JSX.Element {
   return (
     <div className={cl.container}>
       <div className={[cl.burger, cl.burger2].join(' ')}>
-        <span></span>
+        <span />
       </div>
     </div>
-    
   );
 }
 

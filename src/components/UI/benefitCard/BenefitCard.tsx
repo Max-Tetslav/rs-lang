@@ -1,16 +1,21 @@
 import React from 'react';
 import cl from './BenefitCard.module.scss';
 
-interface IProps {title: string, content: string, icon: string, iconAlt: string};
+interface IProps {
+  title: string;
+  content: string;
+  icon: string;
+  iconAlt: string;
+}
 
-const BenefitCard: React.FC<IProps> = (props: IProps) => {
+function BenefitCard({ title, content, icon, iconAlt }: IProps): JSX.Element {
   return (
     <div className={cl.card}>
       <div className={cl.titleContainer}>
-        <img src={props.icon} alt={props.iconAlt} className={cl.img}/>
-        <h4>{props.title}</h4>
+        <img src={icon} alt={iconAlt} className={cl.img} />
+        <h4>{title}</h4>
       </div>
-      <p>{props.content}</p>
+      <p>{content}</p>
     </div>
   );
 }

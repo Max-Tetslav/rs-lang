@@ -1,8 +1,16 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import cl from './Button.module.scss';
 
-export default function Button(props: {onClick?: () => void, content: string}): ReactElement {
+interface IProps {
+  content: string;
+}
+
+function Button({ content }: IProps): JSX.Element {
   return (
-    <button className={cl.btn} onClick={props.onClick}>{props.content}</button>
+    <button className={cl.btn} type="button">
+      {content}
+    </button>
   );
 }
+
+export default Button;

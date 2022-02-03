@@ -2,10 +2,10 @@ import React from 'react';
 import cl from './Homepage.module.scss';
 import HomeContent from '../../components/layout/homeContent/HomeContent';
 
-const Homepage = () => {
+function Homepage(): JSX.Element {
   return (
     <main className={cl.container}>
-      <HomeContent/>
+      <HomeContent />
     </main>
   );
 }
