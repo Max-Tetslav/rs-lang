@@ -1,10 +1,12 @@
 import React from 'react';
 import cl from './NotFound.module.scss';
 
-const NotFound = () => {
+function NotFound(): JSX.Element {
+  const text = `There's nothing here!`;
+
   return (
-    <main style={{ padding: '1rem' }}>
-      <p>There's nothing here!</p>
+    <main className={cl.container}>
+      <p>{text}</p>
     </main>
   );
 }
