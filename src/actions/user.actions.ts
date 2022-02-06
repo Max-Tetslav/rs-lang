@@ -3,15 +3,6 @@ import { ILogin, IUser } from '../types/userTypes';
 import { AppDispatch } from '../store/store';
 import { userSlice } from '../reducers/users.reducer';
 
-// export const createUser = (user: IUser) => async (dispatch: AppDispatch) => {
-//   try {
-//     dispatch(setLoading(true));
-//     await authUser(user);
-//     dispatch(signIn(user, true));
-//   } catch (e) {
-//     dispatch(setLoading(false));
-//   }
-// };
 export const createUser = (user: IUser) => async (dispatch: AppDispatch) => {
   try {
     dispatch(userSlice.actions.userLoading(true));
