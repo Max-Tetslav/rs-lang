@@ -31,11 +31,11 @@ export async function authUser(user: IUser) {
   return fetch(`${config.apiUrl}/users`, setRequest('POST', user));
 }
 
-async function updateUser(id: string, user: IUser) {
+export async function updateUser(id: string, user: IUser) {
   return fetch(`${config.apiUrl}/users/${id}`, setRequest('PUT', user));
 }
 
-async function deleteUser(id: string) {
+export async function deleteUser(id: string) {
   return fetch(`${config.apiUrl}/users/${id}`, setRequest('DELETE'));
 }
 
