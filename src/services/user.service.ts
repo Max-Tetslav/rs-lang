@@ -40,34 +40,34 @@ async function deleteUser(id: string) {
 }
 
 export const getNewUserToken = async (id: string) => {
-  return fetch( `${config.apiUrl}/users/${id}/tokens`, setRequest());
+  return fetch(`${config.apiUrl}/users/${id}/tokens`, setRequest());
+};
+
+export async function getUserWords(id: string) {
+  return fetch(`${config.apiUrl}/users/${id}/words`, setRequest());
 }
 
-export async function getUserWords(id: string){
-  return fetch(`${config.apiUrl}/users/${id}/words`, setRequest())
-}
-
-export async function createUserWord (id: string, wordId: string, word = {}) {
-  return fetch(`${config.apiUrl}/users/${id}/words/${wordId}`, setRequest('POST', word))
+export async function createUserWord(id: string, wordId: string, word = {}) {
+  return fetch(`${config.apiUrl}/users/${id}/words/${wordId}`, setRequest('POST', word));
 }
 
 export async function getUserWord(id: string, wordId: string) {
-  return fetch(`${config.apiUrl}/users/${id}/words/${wordId}`, setRequest())
+  return fetch(`${config.apiUrl}/users/${id}/words/${wordId}`, setRequest());
 }
 
 export async function updateUserWord(id: string, wordId: string, data = {}) {
-  return fetch(`${config.apiUrl}/users/${id}/words/${wordId}`, setRequest('PUT', data))
+  return fetch(`${config.apiUrl}/users/${id}/words/${wordId}`, setRequest('PUT', data));
 }
 
-export async function deleteUserWord (id: string, wordId: string) {
+export async function deleteUserWord(id: string, wordId: string) {
   return fetch(`${config.apiUrl}/users/${id}/words/${wordId}`, setRequest('DELETE'));
 }
 
-export async function getUserStatistic(id: string ) {
-  return fetch(`${config.apiUrl}/users/${id}/statistics`, setRequest())
+export async function getUserStatistic(id: string) {
+  return fetch(`${config.apiUrl}/users/${id}/statistics`, setRequest());
 }
 export async function updateUserStatistic(id: string, data = {}) {
-  return fetch(`${config.apiUrl}/users/${id}/statistics`, setRequest('PUT', data))
+  return fetch(`${config.apiUrl}/users/${id}/statistics`, setRequest('PUT', data));
 }
 export async function getWords(page = 0, group = 0) {
   return fetch(`${config.apiUrl}/words?page=${page}&group=${group}`);
