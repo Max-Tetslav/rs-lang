@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { loginUser } from './services/user.service';
 
 import Book from './views/book/Book';
 import Games from './views/games/Games';
