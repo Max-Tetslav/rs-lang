@@ -1,1 +1,2 @@
-const testing: string = 'test';
+const testing = 'test';
+export default testing;

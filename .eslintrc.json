@@ -20,7 +20,7 @@
     },
     "ecmaVersion": "latest",
     "sourceType": "module",
-    "project": "./tsconfig.json"
+    "project": "tsconfig.json"
   },
   "plugins": [
     "react",
@@ -28,6 +28,7 @@
     "jest"
   ],
   "rules": {
+    "no-param-reassign": "warn",
     "no-console": "error",
     "no-alert": "error",
     "prettier/prettier": [
