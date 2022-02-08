@@ -12,7 +12,7 @@ type ChooseDifficultyProps = {
 
 export default function ChosenLevel({ chosenGame: { gameName, gameLink }, setChosenGame }: ChooseDifficultyProps) {
   const [chosenLevel, setChosenLevel] = useState<boolean>(false);
-  const history = useNavigate();
+  const navigation = useNavigate();
   const getGroupButtons = () => {
     const groupButtons = [];
     for (let i = 0; i < 6; i += 1) {
@@ -23,9 +23,9 @@ export default function ChosenLevel({ chosenGame: { gameName, gameLink }, setCho
 
   useEffect(() => {
     if (chosenLevel) {
-      history(gameLink);
+      navigation(gameLink);
     }
-  }, [chosenLevel, gameLink, history]);
+  }, [chosenLevel, gameLink, navigation]);
 
   return (
     <div className={cl.root}>
