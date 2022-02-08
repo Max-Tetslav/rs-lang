@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Grid } from '@material-ui/core';
 import { GAMES } from '../../utils/constants/gamesConstants';
 import ChosenLevel from './ChosenLavel/ChosenLevel';
 import GameCard from '../../components/UI/gameCard/gameCard';
 import { ChosenGameProps } from '../../types/gameTypes';
+import { setPageTitle } from '../../store/actions';
 
 function Games(): JSX.Element {
   const [chosenGame, setChosenGame] = useState<ChosenGameProps | null>(null);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setPageTitle('Мини-игры'));
+  }, [dispatch]);
+
   return (
     <>
       {!chosenGame && (

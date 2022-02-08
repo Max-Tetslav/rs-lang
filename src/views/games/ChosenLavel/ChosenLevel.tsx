@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import GroupButton from '../../../components/UI/groupButton/GroupButton';
 import cl from './ChosenLevel.module.scss';
 import Button from '../../../components/UI/button/Button';
@@ -10,13 +11,21 @@ type ChooseDifficultyProps = {
 };
 
 export default function ChosenLevel({ chosenGame: { gameName, gameLink }, setChosenGame }: ChooseDifficultyProps) {
+  const [chosenLevel, setChosenLevel] = useState<boolean>(false);
+  const history = useNavigate();
   const getGroupButtons = () => {
     const groupButtons = [];
     for (let i = 0; i < 6; i += 1) {
-      groupButtons.push(<GroupButton key={i} group={i} />);
+      groupButtons.push(<GroupButton key={i} group={i} setChosenLevel={setChosenLevel} />);
     }
     return groupButtons;
   };
+
+  useEffect(() => {
+    if (chosenLevel) {
+      history(gameLink);
+    }
+  }, [chosenLevel, gameLink, history]);
 
   return (
     <div className={cl.root}>

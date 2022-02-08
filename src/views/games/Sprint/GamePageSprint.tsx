@@ -2,15 +2,15 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setPageTitle } from '../../../store/actions';
 
-export default function AudioCall() {
+export default function Sprint() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setPageTitle('Аудиовызов'));
+    dispatch(setPageTitle('Спринт'));
   }, [dispatch]);
   return (
     <>
-      <div>AAAAAAAAAAAAA</div>
+      <div>SSSSSSSSSSSSSSSSSSSSSS</div>
       <div>152</div>
     </>
   );
