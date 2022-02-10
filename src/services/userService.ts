@@ -72,7 +72,10 @@ export async function updateUserStatistic(id: string, data = {}) {
 }
 
 export async function getWords(page = 0, group = 0) {
-  return fetch(`${config.apiUrl}/words?page=${page}&group=${group}`);
+  const request = await fetch(`${config.apiUrl}/words?page=${page}&group=${group}`);
+  const response = await request.json();
+
+  return response;
 }
 
 export async function getWordById(id = '5e9f5ee35eb9e72bc21af4af') {
