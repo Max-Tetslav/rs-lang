@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import Book from './views/book/Book';
+import TextBook from './views/textbook/TextBook';
 import Games from './views/games/Games';
 import Homepage from './views/homepage/Homepage';
 import NotFound from './views/notFound/NotFound';
@@ -15,7 +15,7 @@ function App(): JSX.Element {
       <Routes>
         <Route path="/" element={<Root />}>
           <Route path="/" element={<Homepage />} />
-          <Route path="book" element={<Book />} />
+          <Route path="book" element={<TextBook />} />
           <Route path="games" element={<Games />} />
           <Route path="stats" element={<Stats />} />
           <Route path="team" element={<Team />} />
