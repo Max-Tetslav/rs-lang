@@ -1,0 +1,80 @@
+.container{
+  width: 48%;
+  height: 160px;
+  margin: 10px 0;
+  padding: 20px;
+  border: 1px solid #007bff;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  color: #007bff;
+  background-color: white;
+  transition: all 0.3s ease;
+}
+
+.textContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.textItemContainer{
+  display: flex;
+  color: black;
+
+  .mainWord{
+    border-bottom: 1px solid #007bff;
+  }
+
+  .longTextItem{
+    font-size: 16px;
+  }
+}
+
+.btnsContainer{
+  min-width: 160px;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.translateBtn{
+  border: 2px solid #4dabf5;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  &:hover{
+    background-color: #4dabf5;
+  }
+}
+
+.playBtn{
+  border: 2px solid #4dabf5;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  &:hover{
+    background-color: #4dabf5;
+  }
+}
+
+.checkBtn{
+  border: 2px solid #43d400;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  &:hover{
+    background-color: #43d400;
+  }
+}
+
+.hardBtn{
+  border: 2px solid #f32b4c;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  &:hover{
+    background-color: #f32b4c;
+  }
+}
+
+p{
+  margin: 0;
+}
