@@ -1,7 +1,7 @@
 import { authUser, loginUser } from '../services/userService';
 import { ILogin, IUser } from '../types/userTypes';
 import { AppDispatch } from '../store/store';
-import { userSlice } from '../reducers/users.reducer';
+import { userSlice } from '../reducers/usersReducer';
 
 export const createUser = (user: IUser) => async (dispatch: AppDispatch) => {
   try {

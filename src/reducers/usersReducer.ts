@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IAuth, UserState } from '../types/userTypes';
 
-export const initialState: UserState = {
+export const initState: UserState = {
   user: {
     message: '',
     token: '',
@@ -12,6 +12,17 @@ export const initialState: UserState = {
   loggedIn: false,
   isLoading: false,
 };
+
+const initUserState = () => {
+  const storageData = localStorage.getItem('userData');
+  if (storageData) {
+    const data = JSON.parse(storageData);
+    return { ...initState, ...data, loggedIn: !!data?.token };
+  }
+  return initState;
+};
+
+const initialState: UserState = initUserState();
 
 export const userSlice = createSlice({
   name: 'user',
