@@ -5,6 +5,7 @@
   "dependencies": {
     "@babel/core": "^7.16.0",
     "@material-ui/core": "^4.12.3",
+    "@material-ui/icons": "^4.11.2",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
     "@svgr/webpack": "^5.5.0",
     "@testing-library/jest-dom": "^5.16.1",
@@ -76,8 +77,8 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "format": "prettier --write 'src/**/*.ts{,x}'",
-    "lint": "tsc --noEmit && eslint 'src/**/*.ts{,x}'",
+    "format": "prettier --write ./src/**/*.ts{,x}",
+    "lint": "tsc --noEmit && eslint ./src/**/*.ts{,x}",
     "prepare": "husky install"
   },
   "browserslist": {

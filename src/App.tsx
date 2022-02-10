@@ -8,6 +8,7 @@ import { State, StateCommon } from './types/gameTypes';
 
 import Book from './views/book/Book';
 import AudioCall from './views/games/AudioCall/GamePageAudioCall';
+import { gameReducer } from './views/games/GameReducer';
 import Games from './views/games/Games';
 import Sprint from './views/games/Sprint/GamePageSprint';
 import Homepage from './views/homepage/Homepage';
@@ -29,10 +30,14 @@ const commonReducer: Reducer<StateCommon, Action> = (state = commonState, action
       title: action.payload,
     };
   }
+
   return state;
 };
 
-const rootStore = combineReducers<State>({ commonReducer });
+const rootStore = combineReducers<State>({
+  commonReducer,
+  gameReducer,
+});
 const store = createStore(rootStore, composeWithDevTools(applyMiddleware(thunkMiddleware)));
 function App(): JSX.Element {
   return (

@@ -1,31 +1,36 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import GroupButton from '../../../components/UI/groupButton/GroupButton';
 import cl from './ChosenLevel.module.scss';
 import Button from '../../../components/UI/button/Button';
 import { ChosenGameProps } from '../../../types/gameTypes';
+import { setGameLevel } from '../../../store/actions';
 
-type ChooseDifficultyProps = {
+interface ChooseDifficultyProps {
   chosenGame: ChosenGameProps;
   setChosenGame: React.Dispatch<React.SetStateAction<ChosenGameProps | null>>;
-};
+}
 
 export default function ChosenLevel({ chosenGame: { gameName, gameLink }, setChosenGame }: ChooseDifficultyProps) {
-  const [chosenLevel, setChosenLevel] = useState<boolean>(false);
+  const [isChosenLevel, setIsChosenLevel] = useState<boolean>(false);
+  const [level, setLevel] = useState(0);
   const navigation = useNavigate();
+  const dispatch = useDispatch();
   const getGroupButtons = () => {
     const groupButtons = [];
     for (let i = 0; i < 6; i += 1) {
-      groupButtons.push(<GroupButton key={i} group={i} setChosenLevel={setChosenLevel} />);
+      groupButtons.push(<GroupButton key={i} group={i} setIsChosenLevel={setIsChosenLevel} setLevel={setLevel} />);
     }
     return groupButtons;
   };
 
   useEffect(() => {
-    if (chosenLevel) {
+    if (isChosenLevel) {
+      dispatch(setGameLevel(level));
       navigation(gameLink);
     }
-  }, [chosenLevel, gameLink, navigation]);
+  }, [isChosenLevel, gameLink, navigation]);
 
   return (
     <div className={cl.root}>

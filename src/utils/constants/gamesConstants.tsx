@@ -17,3 +17,5 @@ export const GAMES = [
 ];
 
 export default GAMES;
+
+export const PAGE_NUMBER = 30;

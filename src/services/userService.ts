@@ -71,8 +71,8 @@ export async function updateUserStatistic(id: string, data = {}) {
   return fetch(`${config.apiUrl}/users/${id}/statistics`, setRequest('PUT', data));
 }
 
-export async function getWords(page = 0, group = 0) {
-  return fetch(`${config.apiUrl}/words?page=${page}&group=${group}`);
+export async function getWords(group = 0, page = 0) {
+  return fetch(`${config.apiUrl}/words?group=${group}&page=${page}`);
 }
 
 export async function getWordById(id = '5e9f5ee35eb9e72bc21af4af') {

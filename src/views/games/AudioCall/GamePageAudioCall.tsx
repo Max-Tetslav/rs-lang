@@ -1,17 +1,36 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { setPageTitle } from '../../../store/actions';
+import { State } from '../../../types/gameTypes';
+import { IWord } from '../../../types/wordTypes';
+import Game from './Game/Game';
+import cl from './GamePageAudioCall.module.scss';
+
+const selectGameLevel = (state: State) => state.gameReducer.level;
 
 export default function AudioCall() {
   const dispatch = useDispatch();
+  const level = useSelector(selectGameLevel);
+  const [gameRightAnswers, setGameRightAnswers] = useState<(IWord | null)[] | []>([]);
+  const [gameWrongAnswers, setGameWrongAnswers] = useState<(IWord | null)[] | []>([]);
+  const [isResultsShow, setIsResultsShow] = useState(false);
 
   useEffect(() => {
     dispatch(setPageTitle('Аудиовызов'));
   }, [dispatch]);
+
   return (
-    <>
-      <div>AAAAAAAAAAAAA</div>
-      <div>152</div>
-    </>
+    <div className={cl.audioGameContainer}>
+      {!isResultsShow ? (
+        <Game
+          level={level}
+          setIsResultsShow={setIsResultsShow}
+          setGameRightAnswers={setGameRightAnswers}
+          setGameWrongAnswers={setGameWrongAnswers}
+        />
+      ) : (
+        <div>aaaaaaaaaa</div>
+      )}
+    </div>
   );
 }

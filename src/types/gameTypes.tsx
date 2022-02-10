@@ -1,12 +1,17 @@
-export type ChosenGameProps = {
+export interface ChosenGameProps {
   gameName: string;
   gameLink: string;
-};
+}
 
-export type StateCommon = {
+export interface StateCommon {
   title: string;
-};
+}
 
-export type State = {
+export interface StateGame {
+  level: number;
+}
+
+export interface State {
   commonReducer: StateCommon;
-};
+  gameReducer: StateGame;
+}
