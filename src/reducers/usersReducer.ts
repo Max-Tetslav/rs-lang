@@ -17,7 +17,11 @@ const initUserState = () => {
   const storageData = localStorage.getItem('userData');
   if (storageData) {
     const data = JSON.parse(storageData);
-    return { ...initState, ...data, loggedIn: !!data?.token };
+    return {
+      user: data,
+      loggedIn: !!data?.token,
+      isLoading: false
+    }
   }
   return initState;
 };
