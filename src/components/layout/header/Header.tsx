@@ -10,7 +10,7 @@ function Header({ title }: IProps): JSX.Element {
   return (
     <header className={cl.container}>
       <h1 className={cl.title}>{title}</h1>
-      <Button content="Войти" />
+      <Button clickHandler={() => 0} content="Войти" />
     </header>
   );
 }
