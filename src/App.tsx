@@ -1,6 +1,7 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-
+import { store } from './store/store';
 import Book from './views/book/Book';
 import Games from './views/games/Games';
 import Homepage from './views/homepage/Homepage';
@@ -12,16 +13,18 @@ import Team from './views/team/Team';
 function App(): JSX.Element {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Root />}>
-          <Route path="/" element={<Homepage />} />
-          <Route path="book" element={<Book />} />
-          <Route path="games" element={<Games />} />
-          <Route path="stats" element={<Stats />} />
-          <Route path="team" element={<Team />} />
-        </Route>
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <Provider store={store}>
+        <Routes>
+          <Route path="/" element={<Root />}>
+            <Route path="/" element={<Homepage />} />
+            <Route path="book" element={<Book />} />
+            <Route path="games" element={<Games />} />
+            <Route path="stats" element={<Stats />} />
+            <Route path="team" element={<Team />} />
+          </Route>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Provider>
     </BrowserRouter>
   );
 }
