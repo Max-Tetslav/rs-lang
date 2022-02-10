@@ -20,8 +20,8 @@ const initUserState = () => {
     return {
       user: data,
       loggedIn: !!data?.token,
-      isLoading: false
-    }
+      isLoading: false,
+    };
   }
   return initState;
 };
