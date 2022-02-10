@@ -1,6 +1,6 @@
 import { ILogin, IRequest, IUser } from '../types/userTypes';
 import config from '../utils/config';
-import authHeader from '../utils/helpers/auth-header';
+import authHeader from '../utils/helpers/authHeader';
 
 export const setRequest = (method = 'GET', body = {}) => {
   const request: IRequest = {

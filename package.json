@@ -44,6 +44,7 @@
     "prompts": "^2.4.2",
     "react": "^17.0.2",
     "react-app-polyfill": "^3.0.0",
+    "react-bootstrap": "^2.1.2",
     "react-dev-utils": "^12.0.0",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",
@@ -57,7 +58,6 @@
     "semver": "^7.3.5",
     "source-map-loader": "^3.0.0",
     "style-loader": "^3.3.1",
-    "styled-components": "^5.3.3",
     "tailwindcss": "^3.0.2",
     "terser-webpack-plugin": "^5.2.5",
     "typescript": "^4.5.5",
@@ -71,9 +71,20 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "format": "prettier --write ./src/**/*.ts{,x}",
-    "lint": "tsc --noEmit && eslint ./src/**/*.ts{,x} --fix",
-    "prepare": "husky install"
+    "format": "prettier --write 'src/**/*.ts{,x}'",
+    "lint": "tsc --noEmit && eslint 'src/**/*.ts{,x}'",
+    "prepare": "husky install",
+    "eslint": "eslint src/",
+    "clean": "prettier --write \"**/*.+(ts{,x}|(sa|sc)ss)\" && eslint src/**/*.ts{,x} --fix",
+    "fix-staged": "lint-staged"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{tsx, ts}": "eslint"
   },
   "browserslist": {
     "production": [
@@ -162,8 +173,6 @@
     "presets": [
       "react-app"
     ]
-  },
-  "lint-staged": {
-    "*.{tsx, ts}": "eslint"
   }
+
 }

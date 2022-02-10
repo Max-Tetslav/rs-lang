@@ -1,7 +1,6 @@
-import React, { FunctionComponent } from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
 import AuthForm from '../AuthForm/AuthForm';
-import './Modal.scss';
+import cl from './Modal.module.scss';
 
 export interface ModalProps {
   isShown: boolean;
@@ -11,25 +10,22 @@ export interface ModalProps {
 
 function Modal({ isShown, hide, headerText }: ModalProps) {
   const modal = (
-    <>
-      <div className="backdrop"> </div>
-      <div className="wrapper">
-        <div className="styled-modal">
-          <div className="header">
-            <div className="header-text">{headerText}</div>
-            <button className="close-btn" type="button" onClick={hide}>
-              X
-            </button>
-          </div>
-          <div className="content">
-            <AuthForm />
-          </div>
+    <div className={cl.backdrop}>
+      <section className={cl.wrapper}>
+        <div className={cl.header}>
+          <h5 className={cl.headerText}>{headerText}</h5>
+          <button className={cl.closeBtn} type="button" onClick={hide}>
+            X
+          </button>
         </div>
-      </div>
-    </>
+        <div className={cl.content}>
+          <AuthForm />
+        </div>
+      </section>
+    </div>
   );
 
-  return isShown ? ReactDOM.createPortal(modal, document.body) : null;
+  return isShown ? modal : null;
 }
 
 export default Modal;

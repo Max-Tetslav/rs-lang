@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
-import Button from '../../UI/button/Button';
-import SignIn from './btn.style';
+import React from 'react';
 import cl from './Header.module.scss';
 
 interface IProps {
@@ -12,7 +10,9 @@ function Header({ title, show }: IProps) {
   return (
     <header className={cl.container}>
       <h1 className={cl.title}>{title}</h1>
-      <SignIn onClick={show}>Войти</SignIn>
+      <button className={cl.signIn} onClick={show} type="button">
+        Войти
+      </button>
     </header>
   );
 }

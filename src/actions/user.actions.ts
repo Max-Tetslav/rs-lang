@@ -1,4 +1,4 @@
-import { authUser, loginUser } from '../services/user.service';
+import { authUser, loginUser } from '../services/userService';
 import { ILogin, IUser } from '../types/userTypes';
 import { AppDispatch } from '../store/store';
 import { userSlice } from '../reducers/users.reducer';
