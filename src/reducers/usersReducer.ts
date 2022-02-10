@@ -17,7 +17,11 @@ const initUserState = () => {
   const storageData = localStorage.getItem('userData');
   if (storageData) {
     const data = JSON.parse(storageData);
-    return { ...initState, ...data, loggedIn: !!data?.token };
+    return {
+      user: data,
+      loggedIn: !!data?.token,
+      isLoading: false,
+    };
   }
   return initState;
 };
@@ -36,7 +40,9 @@ export const userSlice = createSlice({
       state.isLoading = action.payload ?? false;
     },
     userLogout(state) {
-      state = initialState;
+      state.user = initState.user;
+      state.loggedIn = initState.loggedIn;
+      state.isLoading = initState.isLoading;
     },
   },
 });
