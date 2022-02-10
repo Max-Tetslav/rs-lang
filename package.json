@@ -73,18 +73,7 @@
     "test": "node scripts/test.js",
     "format": "prettier --write 'src/**/*.ts{,x}'",
     "lint": "tsc --noEmit && eslint 'src/**/*.ts{,x}'",
-    "prepare": "husky install",
-    "eslint": "eslint src/",
-    "clean": "prettier --write \"**/*.+(ts{,x}|(sa|sc)ss)\" && eslint src/**/*.ts{,x} --fix",
-    "fix-staged": "lint-staged"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{tsx, ts}": "eslint"
+    "prepare": "husky install"
   },
   "browserslist": {
     "production": [
@@ -173,6 +162,8 @@
     "presets": [
       "react-app"
     ]
+  },
+  "lint-staged": {
+    "*.{tsx, ts}": "eslint"
   }
-
 }
