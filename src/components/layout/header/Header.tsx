@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { logout } from '../../../actions/userActions';
+import { logout } from '../../../store/actions/userActions';
 import { useAppDispatch, useAppSelector } from '../../../utils/helpers/appHooks';
 import cl from './Header.module.scss';
 
@@ -28,12 +28,6 @@ function Header({ title, show }: IProps) {
       Войти{' '}
     </button>
   );
-
-  useEffect(() => {
-    if (loggedIn) {
-      show();
-    }
-  }, [loggedIn]);
 
   return (
     <header className={cl.container}>

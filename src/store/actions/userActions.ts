@@ -1,17 +1,7 @@
-import { authUser, loginUser } from '../services/userService';
-import { ILogin, IUser } from '../types/userTypes';
-import { AppDispatch } from '../store/store';
+import { authUser, loginUser } from '../../services/userService';
+import { ILogin, IUser } from '../../types/userTypes';
+import { AppDispatch } from '../store';
 import { userSlice } from '../reducers/usersReducer';
-
-export const createUser = (user: IUser) => async (dispatch: AppDispatch) => {
-  try {
-    dispatch(userSlice.actions.userLoading(true));
-    const userAuthData = await (await authUser(user)).json();
-    dispatch(userSlice.actions.userSignin(userAuthData));
-  } catch (e) {
-    dispatch(userSlice.actions.userLoading(false));
-  }
-};
 
 export const signIn =
   (user: ILogin, isLoading = false) =>
@@ -27,6 +17,16 @@ export const signIn =
     }
     dispatch(userSlice.actions.userLoading(false));
   };
+
+export const createUser = (user: IUser) => async (dispatch: AppDispatch) => {
+  try {
+    dispatch(userSlice.actions.userLoading(true));
+    await authUser(user);
+    dispatch(signIn({ email: user.email, password: user.password }, true));
+  } catch (e) {
+    dispatch(userSlice.actions.userLoading(false));
+  }
+};
 
 export const logout = () => async (dispatch: AppDispatch) => {
   try {

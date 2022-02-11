@@ -9,12 +9,12 @@ import useModal from '../utils/helpers/useModal';
 
 function Root(): JSX.Element {
   const { isShown, toggle } = useModal();
-  // const loggedIn = useAppSelector((state) => state.users.loggedIn);
-
-  // useEffect(() => {
-  //   toggle();
-  // }, [loggedIn]);
-
+  const loggedIn = useAppSelector((state) => state.users.loggedIn);
+  useEffect(() => {
+    if (loggedIn && isShown) {
+      toggle();
+    }
+  }, [loggedIn]);
   return (
     <>
       <Menu />

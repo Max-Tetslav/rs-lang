@@ -71,8 +71,8 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "format": "prettier --write \"src/**/*.+(ts{,x}|(sa|sc)ss)\"", 
-    "lint": "tsc --noEmit && eslint src/**/*.ts{,x}",
+    "format": "prettier --write \"src/**/*.+(ts{,x}|(sa|sc)ss)\"",
+    "lint": "tsc --noEmit && eslint \"src/**/*.ts{,x}\"",
     "prepare": "husky install"
   },
   "browserslist": {

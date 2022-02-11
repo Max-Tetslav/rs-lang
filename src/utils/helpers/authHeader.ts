@@ -2,10 +2,10 @@ import { IUserToken } from '../../types/userTypes';
 import getToken from './getToken';
 
 function authHeader() {
-  const user: IUserToken | null = getToken();
+  const token: string | null = getToken();
 
-  if (user && user.token) {
-    return { Authorization: `Bearer ${user.token}` };
+  if (token) {
+    return { Authorization: `Bearer ${token}` };
   }
 
   return { Authorization: '' };

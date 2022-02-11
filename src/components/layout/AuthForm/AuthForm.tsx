@@ -4,10 +4,10 @@ import SignIn from './SignIn';
 import SignUp from './SignUp';
 
 function AuthForm() {
-  const [key, setKey] = useState('signin');
+  const [key, setKey] = useState<string | null>('signin');
 
   return (
-    <Tabs id="controlled-tab-example" activeKey={key} onSelect={(k) => setKey(k!)} className="mb-3">
+    <Tabs id="controlled-tab-example" activeKey={key as string} onSelect={(k: string | null) => setKey(k)} className="mb-3">
       <Tab eventKey="signin" title="Войти">
         <SignIn />
       </Tab>
