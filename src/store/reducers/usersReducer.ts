@@ -40,7 +40,9 @@ export const userSlice = createSlice({
       state.isLoading = action.payload ?? false;
     },
     userLogout(state) {
-      state = initialState;
+      state.user = initState.user;
+      state.loggedIn = initState.loggedIn;
+      state.isLoading = initState.isLoading;
     },
   },
 });

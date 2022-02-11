@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
-import SignIn from './SignIn';
-import SignUp from './SignUp';
+import SignIn from '../SignIn/SignIn';
+import SignUp from '../SignUp/SignUp';
 
 function AuthForm() {
   const [key, setKey] = useState<string | null>('signin');

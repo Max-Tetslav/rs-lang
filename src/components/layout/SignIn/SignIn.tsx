@@ -1,7 +1,7 @@
-import React, { ChangeEventHandler, useState } from 'react';
+import React, { ChangeEventHandler, useEffect, useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { signIn } from '../../../store/actions/userActions';
-import { useAppDispatch } from '../../../utils/helpers/appHooks';
+import { useAppDispatch, useAppSelector } from '../../../utils/helpers/appHooks';
 import cl from './AuthForm.module.scss';
 
 function SignIn() {
@@ -15,6 +15,13 @@ function SignIn() {
   const [submitted, setSubmitted] = useState(false);
 
   const dispatch = useAppDispatch();
+  const loggedIn = useAppSelector((state) => state.users.loggedIn);
+
+  useEffect(() => {
+    if (submitted && !loggedIn) {
+      setError({ ...error, error: true, message: 'Неверный email или пароль!' });
+    }
+  }, [loggedIn]);
 
   const onEmailChange: ChangeEventHandler<HTMLInputElement> = (e): void => {
     setEmail(e.target.value);

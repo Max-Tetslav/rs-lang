@@ -3,18 +3,6 @@ import { ILogin, IUser } from '../../types/userTypes';
 import { AppDispatch } from '../store';
 import { userSlice } from '../reducers/usersReducer';
 
-export const createUser = (user: IUser) => {
-  return async (dispatch: AppDispatch) => {
-    try {
-      dispatch(userSlice.actions.userLoading(true));
-      const userAuthData = await (await authUser(user)).json();
-      dispatch(userSlice.actions.userSignin(userAuthData));
-    } catch (e) {
-      dispatch(userSlice.actions.userLoading(false));
-    }
-  };
-};
-
 export const signIn = (user: ILogin, isLoading = false) => {
   return async (dispatch: AppDispatch) => {
     if (!isLoading) dispatch(userSlice.actions.userLoading(true));
@@ -27,6 +15,18 @@ export const signIn = (user: ILogin, isLoading = false) => {
       throw new Error(`Authentication error ${e}`);
     }
     dispatch(userSlice.actions.userLoading(false));
+  };
+};
+
+export const createUser = (user: IUser) => {
+  return async (dispatch: AppDispatch) => {
+    try {
+      dispatch(userSlice.actions.userLoading(true));
+      await authUser(user);
+      dispatch(signIn({ email: user.email, password: user.password }, true));
+    } catch (e) {
+      dispatch(userSlice.actions.userLoading(false));
+    }
   };
 };
 
