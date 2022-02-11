@@ -3,9 +3,8 @@ import { ILogin, IUser } from '../../types/userTypes';
 import { AppDispatch } from '../store';
 import { userSlice } from '../reducers/usersReducer';
 
-export const signIn =
-  (user: ILogin, isLoading = false) =>
-  async (dispatch: AppDispatch) => {
+export const signIn = (user: ILogin, isLoading = false) => {
+  return async (dispatch: AppDispatch) => {
     if (!isLoading) dispatch(userSlice.actions.userLoading(true));
     try {
       const res = await loginUser(user);
@@ -17,22 +16,27 @@ export const signIn =
     }
     dispatch(userSlice.actions.userLoading(false));
   };
-
-export const createUser = (user: IUser) => async (dispatch: AppDispatch) => {
-  try {
-    dispatch(userSlice.actions.userLoading(true));
-    await authUser(user);
-    dispatch(signIn({ email: user.email, password: user.password }, true));
-  } catch (e) {
-    dispatch(userSlice.actions.userLoading(false));
-  }
 };
 
-export const logout = () => async (dispatch: AppDispatch) => {
-  try {
-    localStorage.setItem('userData', '{}');
-  } catch (e) {
-    throw new Error(`Logout error ${e}`);
-  }
-  dispatch(userSlice.actions.userLogout());
+export const createUser = (user: IUser) => {
+  return async (dispatch: AppDispatch) => {
+    try {
+      dispatch(userSlice.actions.userLoading(true));
+      await authUser(user);
+      dispatch(signIn({ email: user.email, password: user.password }, true));
+    } catch (e) {
+      dispatch(userSlice.actions.userLoading(false));
+    }
+  };
+};
+
+export const logout = () => {
+  return async (dispatch: AppDispatch) => {
+    try {
+      localStorage.setItem('userData', '{}');
+    } catch (e) {
+      throw new Error(`Logout error ${e}`);
+    }
+    dispatch(userSlice.actions.userLogout());
+  };
 };
