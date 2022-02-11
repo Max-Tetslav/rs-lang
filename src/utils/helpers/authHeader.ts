@@ -1,4 +1,3 @@
-import { IUserToken } from '../../types/userTypes';
 import getToken from './getToken';
 
 function authHeader() {

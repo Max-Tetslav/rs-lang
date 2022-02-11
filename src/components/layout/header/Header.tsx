@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { logout } from '../../../store/actions/userActions';
 import { useAppDispatch, useAppSelector } from '../../../utils/helpers/appHooks';
 import cl from './Header.module.scss';
