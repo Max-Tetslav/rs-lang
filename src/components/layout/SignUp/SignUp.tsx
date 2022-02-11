@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, useEffect, useState } from 'react';
+import React, { ChangeEventHandler, useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { createUser } from '../../../store/actions/userActions';
 import { useAppDispatch } from '../../../utils/helpers/appHooks';
