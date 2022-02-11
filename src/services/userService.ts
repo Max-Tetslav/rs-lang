@@ -12,7 +12,7 @@ export const setRequest = (method = 'GET', body = {}) => {
     },
   };
   if (method !== 'GET') request.body = JSON.stringify(body);
-  
+
   return request;
 };
 

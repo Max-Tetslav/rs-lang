@@ -3,11 +3,12 @@ import cl from './Button.module.scss';
 
 interface IProps {
   content: string;
+  click?: () => void; // eslint-disable-line
 }
 
-function Button({ content }: IProps): JSX.Element {
+function Button({ content, click }: IProps): JSX.Element {
   return (
-    <button className={cl.btn} type="button">
+    <button onClick={click} className={cl.btn} type="button">
       {content}
     </button>
   );

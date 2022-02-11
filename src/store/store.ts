@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import rootReducer from '../reducers';
+import rootReducer from './reducers';
 
 declare global {
   interface Window {

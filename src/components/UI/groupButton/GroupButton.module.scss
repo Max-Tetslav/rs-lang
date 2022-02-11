@@ -1,0 +1,23 @@
+.groupNumber {
+  font-size: 18px;
+  line-height: 21px;
+  font-weight: 700;
+  color: #fafcfe;
+}
+
+.groupButton {
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  outline: none;
+  background-color: greenyellow;
+  transition: all 0.3s ease;
+  &:hover {
+    background-color: rgba(190, 4, 4, 0.671);
+  }
+  &:active {
+    background-color: rgb(190, 4, 4);
+  }
+  cursor: 'pointer';
+}
