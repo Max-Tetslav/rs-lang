@@ -5,7 +5,7 @@ import { GAMES } from '../../utils/constants/gamesConstants';
 import ChosenLevel from './ChosenLavel/ChosenLevel';
 import GameCard from '../../components/UI/gameCard/gameCard';
 import { ChosenGameProps } from '../../types/gameTypes';
-import { setPageTitle } from '../../store/actions';
+import { setPageTitle } from '../../store/actions/pageTitleActions';
 
 function Games(): JSX.Element {
   const [chosenGame, setChosenGame] = useState<ChosenGameProps | null>(null);
@@ -18,7 +18,7 @@ function Games(): JSX.Element {
   return (
     <>
       {!chosenGame && (
-        <Grid container direction="row" justifyContent="space-around" alignItems="center" style={{ height: '100%' }}>
+        <Grid container direction="row" justifyContent="space-around" alignItems="center" style={{ height: '90%' }}>
           {GAMES.map(({ name, link, background, description }) => (
             <GameCard name={name} link={link} img={background} description={description} setChosenGame={setChosenGame} />
           ))}

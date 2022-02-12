@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { setPageTitle } from '../../../store/actions';
+import { setPageTitle } from '../../../store/actions/pageTitleActions';
 
 export default function AudioCall() {
   const dispatch = useDispatch();

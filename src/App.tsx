@@ -1,10 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { applyMiddleware, combineReducers, createStore, Reducer } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import thunkMiddleware from 'redux-thunk';
-import { State, StateCommon } from './types/gameTypes';
+import { store } from './store/store';
 
 import Book from './views/book/Book';
 import AudioCall from './views/games/AudioCall/GamePageAudioCall';
@@ -16,24 +13,6 @@ import Root from './views/Root';
 import Stats from './views/stats/Stats';
 import Team from './views/team/Team';
 
-const commonState: StateCommon = {
-  title: '',
-};
-
-type Action = { type: string; payload: any }; // eslint-disable-line
-
-const commonReducer: Reducer<StateCommon, Action> = (state = commonState, action) => { // eslint-disable-line
-  if (action.type === 'SET_PAGE_TITLE') {
-    return {
-      ...state,
-      title: action.payload,
-    };
-  }
-  return state;
-};
-
-const rootStore = combineReducers<State>({ commonReducer });
-const store = createStore(rootStore, composeWithDevTools(applyMiddleware(thunkMiddleware)));
 function App(): JSX.Element {
   return (
     <BrowserRouter>
@@ -42,9 +21,10 @@ function App(): JSX.Element {
           <Route path="/" element={<Root />}>
             <Route path="/" element={<Homepage />} />
             <Route path="book" element={<Book />} />
-            <Route path="/games/audiocall" element={<AudioCall />} />
-            <Route path="/games/sprint" element={<Sprint />} />
-            <Route path="games" element={<Games />} />
+            <Route path="games" element={<Games />}>
+              <Route path="audiocall" element={<AudioCall />} />
+              <Route path="sprint" element={<Sprint />} />
+            </Route>
             <Route path="stats" element={<Stats />} />
             <Route path="team" element={<Team />} />
           </Route>

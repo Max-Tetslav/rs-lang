@@ -28,6 +28,7 @@
     "jest"
   ],
   "rules": {
+    "no-param-reassign": "off",
     "no-console": "error",
     "no-alert": "error",
     "prettier/prettier": [
