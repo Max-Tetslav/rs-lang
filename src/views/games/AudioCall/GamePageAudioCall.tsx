@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setPageTitle } from '../../../store/actions';
+import { setPageTitle } from '../../../store/actions/pageTitleActions';
 import { State } from '../../../types/gameTypes';
 import { IWord } from '../../../types/wordTypes';
-import Game from './Game/Game';
+import Game from './game/Game';
 import cl from './GamePageAudioCall.module.scss';
 
 const selectGameLevel = (state: State) => state.gameReducer.level;

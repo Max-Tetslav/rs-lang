@@ -1,5 +1,5 @@
 import React from 'react';
-import VolumeUp from '@material-ui/icons/VolumeUp';
+// import VolumeUp from '@material-ui/icons/VolumeUp';
 import { IWord } from '../../../types/wordTypes';
 import cl from './AudioCallInfo.module.scss';
 import playEnglishWord from '../../../utils/helpers/playEnglishWord';
@@ -19,7 +19,7 @@ export default function AudioCallInfo({ word, hasAnswer }: AudioCallInfoProps) {
       <div className={cl.infoWrapper}>
         {!hasAnswer ? (
           <button type="button" className={cl.buttonAudio} onClick={onPlay}>
-            <VolumeUp className={`${cl.volumeUp} ${cl.volume}`} />
+            {/* <VolumeUp className={`${cl.volumeUp} ${cl.volume}`} /> */}
           </button>
         ) : (
           <div>aaaaaaa</div>

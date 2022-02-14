@@ -1,4 +1,4 @@
-.menuItem{
+.menuItem {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,16 +8,16 @@
   list-style: none;
   transition: all 0.5s ease;
 
-  &:hover{
-    background-color: #90caf9;;
+  &:hover {
+    background-color: #90caf9;
 
-    .icon{
+    .icon {
       transform: scale(0.95);
     }
   }
 }
 
-.icon{
+.icon {
   width: 40px;
   height: 40px;
   transition: all 0.3s ease;

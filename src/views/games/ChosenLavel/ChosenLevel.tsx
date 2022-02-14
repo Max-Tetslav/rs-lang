@@ -5,7 +5,7 @@ import GroupButton from '../../../components/UI/groupButton/GroupButton';
 import cl from './ChosenLevel.module.scss';
 import Button from '../../../components/UI/button/Button';
 import { ChosenGameProps } from '../../../types/gameTypes';
-import { setGameLevel } from '../../../store/actions';
+import { setGameLevel } from '../../../store/actions/pageTitleActions';
 
 interface ChooseDifficultyProps {
   chosenGame: ChosenGameProps;
