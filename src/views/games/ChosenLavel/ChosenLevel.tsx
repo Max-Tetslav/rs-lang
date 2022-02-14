@@ -10,9 +10,14 @@ import { setGameLevel } from '../../../store/actions/pageTitleActions';
 interface ChooseDifficultyProps {
   chosenGame: ChosenGameProps;
   setChosenGame: React.Dispatch<React.SetStateAction<ChosenGameProps | null>>;
+  setIsGameStart: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function ChosenLevel({ chosenGame: { gameName, gameLink }, setChosenGame }: ChooseDifficultyProps) {
+export default function ChosenLevel({
+  chosenGame: { gameName, gameLink },
+  setChosenGame,
+  setIsGameStart,
+}: ChooseDifficultyProps) {
   const [isChosenLevel, setIsChosenLevel] = useState<boolean>(false);
   const [level, setLevel] = useState(0);
   const navigation = useNavigate();
@@ -29,6 +34,7 @@ export default function ChosenLevel({ chosenGame: { gameName, gameLink }, setCho
     if (isChosenLevel) {
       dispatch(setGameLevel(level));
       navigation(gameLink);
+      setIsGameStart(true);
     }
   }, [isChosenLevel, gameLink, navigation]);
 

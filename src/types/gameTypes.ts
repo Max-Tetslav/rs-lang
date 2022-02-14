@@ -3,15 +3,7 @@ export interface ChosenGameProps {
   gameLink: string;
 }
 
-export interface StateCommon {
-  title: string;
-}
-
 export interface StateGame {
   level: number;
 }
 
-export interface State {
-  commonReducer: StateCommon;
-  gameReducer: StateGame;
-}

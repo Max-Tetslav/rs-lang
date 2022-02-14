@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPageTitle } from '../../../store/actions/pageTitleActions';
-import { State } from '../../../types/gameTypes';
 import { IWord } from '../../../types/wordTypes';
 import Game from './game/Game';
 import cl from './GamePageAudioCall.module.scss';
 
-const selectGameLevel = (state: State) => state.gameReducer.level;
+const selectGameLevel = (state: any) => state.games.level;
 
 export default function AudioCall() {
   const dispatch = useDispatch();
