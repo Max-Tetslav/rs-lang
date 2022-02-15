@@ -1,42 +1,55 @@
 import React, { useState, useEffect } from 'react';
 import useFetching from '../../../hooks/useFetching';
-import { getWords } from '../../../services/userService';
+import { getUserHardWords, getWords } from '../../../services/userService';
 import { IWord } from '../../../types/wordTypes';
 import cl from './TextbookContent.module.scss';
 
-import PageButton from '../../UI/pageNumButton/PageNumButton';
 import WordsList from '../wordsList/WordsList';
+import LoadingWordList from '../../UI/loadingWordList/LoadingWordList';
+import { useAppSelector } from '../../../utils/helpers/appHooks';
 
 interface IProps {
   unitNum: number;
+  page: number;
+  changePage: React.Dispatch<React.SetStateAction<number>>;
+  isHardUnit: boolean;
 }
 
-function TextbookContent({ unitNum }: IProps): JSX.Element {
-  const [pageNum, setPageNum] = useState(0);
+function TextbookContent({ unitNum, page, changePage, isHardUnit }: IProps): JSX.Element {
   const [words, setWords] = useState([] as IWord[]);
-  const [fetchWords, isWordsLoading, wordsError] = useFetching(async () => {
-    const data = await getWords(pageNum, unitNum);
+  const hardWords = useAppSelector((state) => state.words.hardWords);
 
-    setWords(data);
+  const [fetchWords, isWordsLoading, wordsError] = useFetching(async () => {
+    if (isHardUnit) {
+      const authId = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData') as string).userId : '';
+      await getUserHardWords(authId);
+
+      setWords(hardWords);
+    } else {
+      const data = await getWords(page, unitNum);
+
+      setWords(data);
+    }
   });
 
   useEffect(() => {
     fetchWords();
-  }, [unitNum]);
+
+    return () => {
+      localStorage.setItem('hardWords', JSON.stringify(hardWords));
+    };
+  }, [unitNum, page, isHardUnit]);
+
+  useEffect(() => {
+    if (isHardUnit) {
+      fetchWords();
+    }
+  }, [hardWords]);
 
   return (
     <section className={cl.container}>
-      <div className={cl.wordsContainer}>
-        {wordsError && <h1>ERROR {wordsError}</h1>}
-        {isWordsLoading ? <h1>Загрузка</h1> : <WordsList words={words} />}
-      </div>
-      <div>
-        <PageButton />
-        <PageButton />
-        <PageButton />
-        <PageButton />
-        <PageButton />
-      </div>
+      {wordsError && <h1>ERROR {wordsError}</h1>}
+      {isWordsLoading ? <LoadingWordList /> : <WordsList words={words} setPageNum={changePage} isHard={isHardUnit} />}
     </section>
   );
 }
