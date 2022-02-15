@@ -1,4 +1,5 @@
 import { ILogin, IRequest, IUser } from '../types/userTypes';
+import { IWord } from '../types/wordTypes';
 import config from '../utils/config';
 import authHeader from '../utils/helpers/authHeader';
 
@@ -45,7 +46,19 @@ export const getNewUserToken = async (id: string) => {
 };
 
 export async function getUserWords(id: string) {
-  return fetch(`${config.apiUrl}/users/${id}/words`, setRequest());
+  const request = await fetch(`${config.apiUrl}/users/${id}/words`, setRequest());
+  const response = await request.json();
+
+  return response;
+}
+
+export async function getUserHardWords(id: string): Promise<[{ paginatedResults: IWord[] }]> {
+  const querryParams = '?wordsPerPage=3600&filter=%7B%22%24and%22%3A%5B%7B%22userWord.difficulty%22%3A%22hard%22%7D%5D%7D';
+  const request = await fetch(`${config.apiUrl}/users/${id}/aggregatedWords/${querryParams}`, setRequest());
+
+  const response = await request.json();
+
+  return response;
 }
 
 export async function createUserWord(id: string, wordId: string, word = {}) {
