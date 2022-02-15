@@ -1,28 +1,28 @@
 import React from 'react';
+import cl from './WordsList.module.scss';
 import { IWord } from '../../../types/wordTypes';
 import WordCard from '../../UI/wordCard/WordCard';
-import cl from './WordsList.module.scss';
+import Pagination from '../pagination/Pagination';
 
 interface IProps {
   words: IWord[];
+  setPageNum: React.Dispatch<React.SetStateAction<number>>;
+  isHard: boolean;
 }
 
-function WordsList({ words }: IProps): JSX.Element {
+function WordsList({ words, setPageNum, isHard }: IProps): JSX.Element {
   return (
     <div className={cl.wordsContainer}>
-      {words.map((item) => {
-        return (
-          <WordCard
-            enWord={item.word}
-            transctiption={item.transcription}
-            enMeaning={item.textMeaning}
-            enExample={item.textExample}
-            ruWord={item.wordTranslate}
-            ruMeaning={item.textMeaningTranslate}
-            ruExample={item.textExampleTranslate}
-          />
-        );
-      })}
+      {words.length ? (
+        <>
+          {words.map((item) => (
+            <WordCard key={item.id} wordObject={item} isHardUnit={isHard} />
+          ))}
+          {isHard ? null : <Pagination setPage={setPageNum} />}
+        </>
+      ) : (
+        <h1>Нет слов</h1>
+      )}
     </div>
   );
 }
