@@ -6,8 +6,8 @@ type Action = { type: string; payload: any }; // eslint-disable-line
 export const gameState: StateGame = {
   level: 0,
 };
-
-export const gameReducer: Reducer<StateGame, Action> = (state = gameState, action) => { // eslint-disable-line
+// eslint-disable-next-line
+export const gameReducer: Reducer<StateGame, Action> = (state = gameState, action) => {
   if (action.type === 'SET_GAME_LEVEL') {
     return {
       ...state,

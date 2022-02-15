@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Results from '../../../components/UI/results/Results';
 import { setPageTitle } from '../../../store/actions/pageTitleActions';
 import { IWord } from '../../../types/wordTypes';
 import Game from './game/Game';
 import cl from './GamePageAudioCall.module.scss';
 
-const selectGameLevel = (state: any) => state.games.level;
+const selectGameLevel = (state: any) => state.games.level; // eslint-disable-line
 
 export default function AudioCall() {
   const dispatch = useDispatch();
@@ -28,7 +29,14 @@ export default function AudioCall() {
           setGameWrongAnswers={setGameWrongAnswers}
         />
       ) : (
-        <div>aaaaaaaaaa</div>
+        <Results
+          isResultsShow={isResultsShow}
+          setIsResultsShow={setIsResultsShow}
+          rightAnswers={gameRightAnswers}
+          wrongAnswers={gameWrongAnswers}
+          setRightAnswers={setGameRightAnswers}
+          setWrongAnswers={setGameWrongAnswers}
+        />
       )}
     </div>
   );

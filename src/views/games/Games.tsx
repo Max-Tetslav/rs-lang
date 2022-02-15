@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Outlet } from 'react-router-dom';
-import { Grid } from '@material-ui/core';
 import { GAMES } from '../../utils/constants/gamesConstants';
 import ChosenLevel from './chosenLavel/ChosenLevel';
 import GameCard from '../../components/UI/gameCard/gameCard';

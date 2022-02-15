@@ -67,11 +67,11 @@ export default function Game({ setGameRightAnswers, setGameWrongAnswers, setIsRe
     }
   }, [word]);
 
-  useEffect(() => {
-    if (playedWords.length === words.length && words.length) {
-      setIsResultsShow(true);
-    }
-  }, [playedWords, words]);
+  // useEffect(() => {
+  //   if (playedWords.length === words.length && words.length) {
+  //     setIsResultsShow(true);
+  //   }
+  // }, [playedWords, words]);
 
   const checkIsAnswerRight = (answer: string) => {
     if (answer === word?.wordTranslate) {
@@ -92,15 +92,19 @@ export default function Game({ setGameRightAnswers, setGameWrongAnswers, setIsRe
   };
 
   const handleNextWordClick = () => {
-    if (hasAnswer) {
-      setHasAnswer(false);
-      getRandomWord();
-    } else {
-      setHasAnswer(true);
-      setGameWrongAnswers((prev) => [...prev, word]);
-      if (word && !playedWords.includes(word?.word)) {
-        setPlayedWords((prev) => [...prev, word?.word]);
+    if (playedWords.length !== words.length && words.length) {
+      if (hasAnswer) {
+        setHasAnswer(false);
+        getRandomWord();
+      } else {
+        setHasAnswer(true);
+        setGameWrongAnswers((prev) => [...prev, word]);
+        if (word && !playedWords.includes(word?.word)) {
+          setPlayedWords((prev) => [...prev, word?.word]);
+        }
       }
+    } else {
+      setIsResultsShow(true);
     }
   };
 
