@@ -1,10 +1,15 @@
 import React from 'react';
 import cl from './PageNumButton.module.scss';
 
-function PageNumButton() {
+interface IProps {
+  pageNum: number;
+  clickHandler: React.Dispatch<React.SetStateAction<number>>;
+}
+
+function PageNumButton({ pageNum, clickHandler }: IProps): JSX.Element {
   return (
-    <button className={cl.button} type="button">
-      1
+    <button className={cl.button} onClick={() => clickHandler(pageNum - 1)} type="button">
+      {pageNum}
     </button>
   );
 }
