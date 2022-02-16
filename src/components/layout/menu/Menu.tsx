@@ -16,10 +16,10 @@ function Menu(): JSX.Element {
       <nav>
         <ul className={cl.linkList}>
           <MenuItem icon={homeSvg} alt="home-icon" href="/" />
-          <MenuItem icon={bookSvg} alt="book-icon" href="/book" />
-          <MenuItem icon={gamesSvg} alt="games-icon" href="/games" />
-          <MenuItem icon={statsSvg} alt="stats-icon" href="/stats" />
-          <MenuItem icon={teamSvg} alt="team-icon" href="/team" />
+          <MenuItem icon={bookSvg} alt="book-icon" href="book" />
+          <MenuItem icon={gamesSvg} alt="games-icon" href="games" />
+          <MenuItem icon={statsSvg} alt="stats-icon" href="stats" />
+          <MenuItem icon={teamSvg} alt="team-icon" href="team" />
         </ul>
       </nav>
     </aside>

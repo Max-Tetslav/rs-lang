@@ -18,7 +18,7 @@ function Root(): JSX.Element {
   return (
     <>
       <Menu />
-      <Header title="Главная" show={toggle} />
+      <Header show={toggle} />
       <Modal isShown={isShown} hide={toggle} headerText="Авторизация" />
       <Outlet />
     </>

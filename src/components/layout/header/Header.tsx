@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { logout } from '../../../store/actions/userActions';
 import { useAppDispatch, useAppSelector } from '../../../utils/helpers/appHooks';
 import cl from './Header.module.scss';
 
 interface IProps {
-  title: string;
   show: () => void;
 }
 
-function Header({ title, show }: IProps) {
+function Header({ show }: IProps) {
   const dispatch = useAppDispatch();
+  const curretPageTitle = useAppSelector((state) => state.title.pageTitle);
+
+  useEffect(() => {}, [curretPageTitle]);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -31,7 +33,7 @@ function Header({ title, show }: IProps) {
 
   return (
     <header className={cl.container}>
-      <h1 className={cl.title}>{title}</h1>
+      <h1 className={cl.title}>{curretPageTitle}</h1>
       <div className={cl.userWrapper}>
         <h4>{user.name}</h4>
         {btn}
