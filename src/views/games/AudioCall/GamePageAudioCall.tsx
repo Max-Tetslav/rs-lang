@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Results from '../../../components/UI/results/Results';
 import { setPageTitle } from '../../../store/actions/pageTitleActions';
 import { IWord } from '../../../types/wordTypes';
-import Game from './Game/Game';
+import AudioCallContent from '../../../components/layout/AudioCallContent/AudioCallContent';
 import cl from './GamePageAudioCall.module.scss';
 
 const selectGameLevel = (state: any) => state.games.level; // eslint-disable-line
@@ -22,7 +22,7 @@ function AudioCall() {
   return (
     <div className={cl.audioGameContainer}>
       {!isResultsShow ? (
-        <Game
+        <AudioCallContent
           level={level}
           setIsResultsShow={setIsResultsShow}
           setGameRightAnswers={setGameRightAnswers}

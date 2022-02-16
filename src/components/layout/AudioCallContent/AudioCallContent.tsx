@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import Answers from '../../../../components/UI/answers/Answers';
-import AudioCallInfo from '../../../../components/UI/audioCallInfo/AudioCallInfo';
-import { getWords } from '../../../../services/userService';
-import { IWord } from '../../../../types/wordTypes';
-import { PAGE_NUMBER } from '../../../../utils/constants/gamesConstants';
-import playEnglishWord from '../../../../utils/helpers/playEnglishWord';
-import cl from './Game.module.scss';
+import Answers from '../../UI/answers/Answers';
+import AudioCallInfo from '../../UI/audioCallInfo/AudioCallInfo';
+import LoadingWordList from '../../UI/loadingWordList/LoadingWordList';
+import { getWords } from '../../../services/userService';
+import { IWord } from '../../../types/wordTypes';
+import { PAGE_NUMBER } from '../../../utils/constants/gamesConstants';
+import playEnglishWord from '../../../utils/helpers/playEnglishWord';
+import cl from './AudioCallContent.module.scss';
 
 interface IGameProps {
   setGameRightAnswers: React.Dispatch<React.SetStateAction<(IWord | null)[]>>;
@@ -14,7 +15,7 @@ interface IGameProps {
   level: number;
 }
 
-function Game({ setGameRightAnswers, setGameWrongAnswers, setIsResultsShow, level }: IGameProps) {
+function AudioCallContent({ setGameRightAnswers, setGameWrongAnswers, setIsResultsShow, level }: IGameProps) {
   const [words, setWords] = useState<IWord[] | []>([]);
   const [word, setWord] = useState<IWord | null>(null);
   const [playedWords, setPlayedWords] = useState<string[]>([]);
@@ -109,7 +110,7 @@ function Game({ setGameRightAnswers, setGameWrongAnswers, setIsResultsShow, leve
 
   return (
     <div className={cl.gameContainer}>
-      <AudioCallInfo hasAnswer={hasAnswer} word={word} />
+      {!isDataLoaded ? <LoadingWordList /> : <AudioCallInfo hasAnswer={hasAnswer} word={word} />}
       <Answers
         handleAnswerClick={handleAnswerClick}
         handleNextWordClick={handleNextWordClick}
@@ -122,4 +123,4 @@ function Game({ setGameRightAnswers, setGameWrongAnswers, setIsResultsShow, leve
   );
 }
 
-export default Game;
+export default AudioCallContent;

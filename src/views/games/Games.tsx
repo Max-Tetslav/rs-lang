@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Outlet, useLocation } from 'react-router-dom';
 import { GAMES } from '../../utils/constants/gamesConstants';
-import ChosenLevel from './chosenLavel/ChosenLevel';
+import ChosenLevel from './choosenLavel/ChosenLevel';
 import GameCard from '../../components/UI/gameCard/gameCard';
 import { ChosenGameProps } from '../../types/gameTypes';
 import { setPageTitle } from '../../store/actions/pageTitleActions';

@@ -30,7 +30,7 @@
     color: gray;
     border-color: gray;
     &:hover {
-      background-color: white;
+      background-color: none;
       transform: scale(1);
     }
   }
@@ -41,11 +41,15 @@
 }
 
 .disabledF:disabled {
-  color: red;
+  color: #fff;
+  border-color: red;
+  background-color: rgba(255, 0, 0, 0.6);
 }
 
 .disabledR:disabled {
-  color: green;
+  color: #fff;
+  border-color: green;
+  background-color: rgba(0, 128, 0, 0.6);
 }
 
 .nextButton {
