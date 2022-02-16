@@ -46,7 +46,7 @@ export default function ChosenLevel({
         <div className={cl.groupButtonsContainer}>{getGroupButtons()}</div>
         <div className={cl.backBtn}>
           <Button
-            click={() => {
+            clickHandler={() => {
               setChosenGame(null);
             }}
             content="Назад к играм"

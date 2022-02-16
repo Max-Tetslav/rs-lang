@@ -1,0 +1,21 @@
+.button {
+  min-height: 50px;
+  min-width: 12%;
+  border-left: 1px solid #7c0400;
+  border-right: 1px solid #7c0400;
+  font-size: 24px;
+  color: #7c0400;
+  transition: all 0.3s ease;
+  &:hover {
+    background-color: rgba(158, 0, 0, 0.2);
+    color: #7c0400;
+  }
+  &:disabled {
+    color: lightgray;
+    border-color: lightgray;
+    &:hover {
+      background-color: white;
+      color: lightgray;
+    }
+  }
+}

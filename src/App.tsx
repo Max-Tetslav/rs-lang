@@ -3,8 +3,8 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { store } from './store/store';
 
-import Book from './views/book/Book';
-import AudioCall from './views/games/audioCall/GamePageAudioCall';
+import TextBook from './views/textbook/TextBook';
+import AudioCall from './views/games/AudioCall/GamePageAudioCall';
 import Games from './views/games/Games';
 import Sprint from './views/games/sprint/GamePageSprint';
 import Homepage from './views/homepage/Homepage';
@@ -20,7 +20,7 @@ function App(): JSX.Element {
         <Routes>
           <Route path="/" element={<Root />}>
             <Route path="/" element={<Homepage />} />
-            <Route path="book" element={<Book />} />
+            <Route path="book" element={<TextBook />} />
             <Route path="games" element={<Games />}>
               <Route path="audiocall" element={<AudioCall />} />
               <Route path="sprint" element={<Sprint />} />
