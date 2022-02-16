@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import cl from './MenuItem.module.scss';
 import { update } from '../../../store/reducers/pageTitleReducer';
 import { useAppDispatch } from '../../../utils/helpers/appHooks';
@@ -13,9 +13,19 @@ interface IProps {
 
 function MenuItem({ icon, alt, href }: IProps): JSX.Element {
   const dispatch = useAppDispatch();
+  const [isActive, setIsActive] = useState<boolean | null>(null);
+  const location = useLocation().pathname === '/' ? '/' : useLocation().pathname.split('/');
+
+  useEffect(() => {
+    if (href === location || location.includes(href)) {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
+  }, [location, isActive]);
 
   return (
-    <li className={cl.menuItem}>
+    <li className={isActive === true ? [cl.menuItem, cl.paintedMenuItem].join(' ') : [cl.menuItem].join(' ')}>
       <Link
         to={href}
         onClick={() => {
