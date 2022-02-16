@@ -35,7 +35,7 @@ export default function ChosenLevel({ chosenGame: { gameName, gameLink }, setCho
         <div className={cl.groupButtonsContainer}>{getGroupButtons()}</div>
         <div className={cl.backBtn}>
           <Button
-            click={() => {
+            clickHandler={() => {
               setChosenGame(null);
             }}
             content="Назад к играм"

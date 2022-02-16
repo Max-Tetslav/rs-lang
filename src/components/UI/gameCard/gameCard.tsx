@@ -31,7 +31,7 @@ export default function GameCard({ name, link, img, description, setChosenGame }
           <Typography className={`${cl.description} ${cl.text}`}>{description}</Typography>
         </Grid>
         <Grid item xs={12} className={`${cl.buttonWrapper} ${cl.wrapper}`}>
-          <Button click={handlePlayButtonClick} content="Играть" />
+          <Button clickHandler={handlePlayButtonClick} content="Играть" />
         </Grid>
       </Grid>
     </Card>

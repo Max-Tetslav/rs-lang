@@ -14,7 +14,7 @@ function HomeContent(): JSX.Element {
           Приложение для изучения иностранных слов с техникой интервального повторения, отслеживания индивидуального прогресса и
           мини-игр.
         </p>
-        <Button content="Смотреть демонстацию" />
+        <Button clickHandler={() => 0} content="Смотреть демонстацию" />
       </div>
       <BenefitsList />
     </section>
