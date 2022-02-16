@@ -3,6 +3,8 @@ import { IWord } from '../../../types/wordTypes';
 import cl from './AudioCallInfo.module.scss';
 import playEnglishWord from '../../../utils/helpers/playEnglishWord';
 import sound from '../../../assets/svg/sound.svg';
+import deleteTags from '../../../utils/helpers/deleteTags';
+import firtsLetterToUpperCase from '../../../utils/helpers/firstLetterToUpperCase';
 
 interface AudioCallInfoProps {
   word: IWord | null;
@@ -37,14 +39,15 @@ export default function AudioCallInfo({ word, hasAnswer }: AudioCallInfoProps) {
                   <img src={sound} alt="sound" />
                 </button>
                 <span className={cl.text}>
-                  {`${word?.word} `} <em style={{ color: '#ffab00' }}>{word?.transcription}</em> {` - ${word?.wordTranslate}`}
+                  {`${word?.word ? firtsLetterToUpperCase(word?.word) : ''} `}{' '}
+                  <em style={{ color: '#ffab00' }}>{word?.transcription}</em> {` - ${word?.wordTranslate}`}
                 </span>
               </div>
               <div className={cl.textInfo}>
                 <button type="button" className={cl.buttonAudioAnswer} onClick={onPlayAudioExample}>
                   <img src={sound} alt="sound" />
                 </button>
-                <span className={cl.text}>{word?.textExample} </span>
+                <span className={cl.text}>{word?.textExample ? deleteTags(word?.textExample) : ''} </span>
               </div>
               <div className={cl.textInfo}>
                 <span className={cl.textTranslate}>{`${word?.textExampleTranslate}. `}</span>

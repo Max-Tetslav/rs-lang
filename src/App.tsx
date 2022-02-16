@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { store } from './store/store';
 
 import TextBook from './views/textbook/TextBook';
-import AudioCall from './views/games/AudioCall/GamePageAudioCall';
 import Games from './views/games/Games';
 import Sprint from './views/games/sprint/GamePageSprint';
 import Homepage from './views/homepage/Homepage';
@@ -12,6 +11,7 @@ import NotFound from './views/notFound/NotFound';
 import Root from './views/Root';
 import Stats from './views/stats/Stats';
 import Team from './views/team/Team';
+import AudioCall from './views/games/audioCall/GamePageAudioCall';
 
 function App(): JSX.Element {
   return (

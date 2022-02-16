@@ -14,7 +14,7 @@ interface IGameProps {
   level: number;
 }
 
-export default function Game({ setGameRightAnswers, setGameWrongAnswers, setIsResultsShow, level }: IGameProps) {
+function Game({ setGameRightAnswers, setGameWrongAnswers, setIsResultsShow, level }: IGameProps) {
   const [words, setWords] = useState<IWord[] | []>([]);
   const [word, setWord] = useState<IWord | null>(null);
   const [playedWords, setPlayedWords] = useState<string[]>([]);
@@ -47,14 +47,10 @@ export default function Game({ setGameRightAnswers, setGameWrongAnswers, setIsRe
   };
 
   useEffect(() => {
-    getWords(level, Math.floor(Math.random() * PAGE_NUMBER))
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setWords(data);
-        setIsDataLoaded(true);
-      });
+    getWords(Math.floor(Math.random() * PAGE_NUMBER), level).then((data) => {
+      setWords(data);
+      setIsDataLoaded(true);
+    });
   }, [level]);
 
   useEffect(() => {
@@ -76,9 +72,6 @@ export default function Game({ setGameRightAnswers, setGameWrongAnswers, setIsRe
     } else {
       setGameWrongAnswers((prev) => [...prev, word]);
     }
-    // if (word?.wordTranslate) {
-    //   setRightAnswer(word?.wordTranslate);
-    // }
   };
 
   const handleAnswerClick = (answer: string) => {
@@ -128,3 +121,5 @@ export default function Game({ setGameRightAnswers, setGameWrongAnswers, setIsRe
     </div>
   );
 }
+
+export default Game;

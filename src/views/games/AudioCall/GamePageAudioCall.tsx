@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import Results from '../../../components/UI/results/Results';
 import { setPageTitle } from '../../../store/actions/pageTitleActions';
 import { IWord } from '../../../types/wordTypes';
-import Game from './game/Game';
+import Game from './Game/Game';
 import cl from './GamePageAudioCall.module.scss';
 
 const selectGameLevel = (state: any) => state.games.level; // eslint-disable-line
 
-export default function AudioCall() {
+function AudioCall() {
   const dispatch = useDispatch();
   const level = useSelector(selectGameLevel);
   const [gameRightAnswers, setGameRightAnswers] = useState<(IWord | null)[] | []>([]);
@@ -40,3 +40,5 @@ export default function AudioCall() {
     </div>
   );
 }
+
+export default AudioCall;

@@ -59,7 +59,7 @@ function Results({ setIsResultsShow, wrongAnswers, rightAnswers, setRightAnswers
           <div className={cl.backSection}>
             <Button
               content="Играть заново"
-              click={() => {
+              clickHandler={() => {
                 setIsResultsShow(false);
                 setRightAnswers([]);
                 setWrongAnswers([]);
@@ -68,7 +68,7 @@ function Results({ setIsResultsShow, wrongAnswers, rightAnswers, setRightAnswers
             />
             <Button
               content="Закрыть"
-              click={() => {
+              clickHandler={() => {
                 setIsResultsShow(false);
                 setRightAnswers([]);
                 setWrongAnswers([]);
