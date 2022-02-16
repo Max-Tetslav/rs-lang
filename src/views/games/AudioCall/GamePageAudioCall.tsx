@@ -30,7 +30,6 @@ export default function AudioCall() {
         />
       ) : (
         <Results
-          isResultsShow={isResultsShow}
           setIsResultsShow={setIsResultsShow}
           rightAnswers={gameRightAnswers}
           wrongAnswers={gameWrongAnswers}

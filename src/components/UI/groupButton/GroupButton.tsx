@@ -6,7 +6,6 @@ interface GroupButtonProps {
   setIsChosenLevel: React.Dispatch<React.SetStateAction<boolean>>;
   setLevel: React.Dispatch<React.SetStateAction<number>>;
 }
-
 export default function GroupButton({ group, setIsChosenLevel, setLevel }: GroupButtonProps) {
   const handleGroupClick = () => {
     setIsChosenLevel(true);

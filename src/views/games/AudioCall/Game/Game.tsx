@@ -21,6 +21,8 @@ export default function Game({ setGameRightAnswers, setGameWrongAnswers, setIsRe
   const [variantsAnswers, setVariantsAnswers] = useState<string[]>([]);
   const [hasAnswer, setHasAnswer] = useState(false);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
+  const [rightAnswer, setRightAnswer] = useState<string | []>('');
+  const [answerWord, setAnswerWord] = useState<string | []>('');
 
   const getVariantsAnswers = (randomWord: IWord) => {
     let arrAnswers: string[] = [randomWord?.wordTranslate];
@@ -67,23 +69,22 @@ export default function Game({ setGameRightAnswers, setGameWrongAnswers, setIsRe
     }
   }, [word]);
 
-  // useEffect(() => {
-  //   if (playedWords.length === words.length && words.length) {
-  //     setIsResultsShow(true);
-  //   }
-  // }, [playedWords, words]);
-
   const checkIsAnswerRight = (answer: string) => {
     if (answer === word?.wordTranslate) {
       setGameRightAnswers((prev) => [...prev, word]);
+      setRightAnswer(answer);
     } else {
       setGameWrongAnswers((prev) => [...prev, word]);
     }
+    // if (word?.wordTranslate) {
+    //   setRightAnswer(word?.wordTranslate);
+    // }
   };
 
   const handleAnswerClick = (answer: string) => {
     if (!hasAnswer) {
       checkIsAnswerRight(answer);
+      setAnswerWord(answer);
       setHasAnswer(true);
       if (word && !playedWords.includes(word.word)) {
         setPlayedWords((prev: string[]) => [...prev, word.word]);
@@ -96,9 +97,14 @@ export default function Game({ setGameRightAnswers, setGameWrongAnswers, setIsRe
       if (hasAnswer) {
         setHasAnswer(false);
         getRandomWord();
+        setRightAnswer('');
+        setAnswerWord('');
       } else {
         setHasAnswer(true);
         setGameWrongAnswers((prev) => [...prev, word]);
+        if (word) {
+          setRightAnswer(word?.wordTranslate);
+        }
         if (word && !playedWords.includes(word?.word)) {
           setPlayedWords((prev) => [...prev, word?.word]);
         }
@@ -116,6 +122,8 @@ export default function Game({ setGameRightAnswers, setGameWrongAnswers, setIsRe
         handleNextWordClick={handleNextWordClick}
         variantsAnswers={variantsAnswers}
         hasAnswer={hasAnswer}
+        rightAnswer={rightAnswer.toString()}
+        answerWord={answerWord.toString()}
       />
     </div>
   );

@@ -7,9 +7,18 @@ interface IAnswersProps {
   handleNextWordClick: () => void;
   variantsAnswers: string[];
   hasAnswer: boolean;
+  rightAnswer: string;
+  answerWord: string;
 }
 
-export default function Answers({ handleAnswerClick, handleNextWordClick, variantsAnswers, hasAnswer }: IAnswersProps) {
+export default function Answers({
+  handleAnswerClick,
+  handleNextWordClick,
+  variantsAnswers,
+  hasAnswer,
+  rightAnswer,
+  answerWord,
+}: IAnswersProps) {
   const clickKeysHandler = (event: KeyboardEvent) => {
     if (['Digit1', 'Digit2', 'Digit3', 'Digit3', 'Digit4'].includes(event.code)) {
       if (!hasAnswer) {
@@ -31,16 +40,34 @@ export default function Answers({ handleAnswerClick, handleNextWordClick, varian
     <>
       <div className={cl.answersWrapper}>
         {!hasAnswer && (
-          <div>
+          <div className={cl.buttonWrapper}>
             {variantsAnswers.map((answer, index) => {
-              return <AnswerButton handleAnswerClick={handleAnswerClick} answer={answer} index={index} hasAnswer={hasAnswer} />;
+              return (
+                <AnswerButton
+                  handleAnswerClick={handleAnswerClick}
+                  answer={answer}
+                  index={index}
+                  hasAnswer={hasAnswer}
+                  rightAnswer={rightAnswer}
+                  answerWord={answerWord}
+                />
+              );
             })}
           </div>
         )}
         {hasAnswer && (
-          <div>
+          <div className={cl.buttonWrapper}>
             {variantsAnswers.map((answer, index) => {
-              return <AnswerButton handleAnswerClick={handleAnswerClick} answer={answer} index={index} hasAnswer={hasAnswer} />;
+              return (
+                <AnswerButton
+                  handleAnswerClick={handleAnswerClick}
+                  answer={answer}
+                  index={index}
+                  hasAnswer={hasAnswer}
+                  rightAnswer={rightAnswer}
+                  answerWord={answerWord}
+                />
+              );
             })}
           </div>
         )}

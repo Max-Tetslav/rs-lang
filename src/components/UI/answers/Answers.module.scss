@@ -8,7 +8,7 @@
 
 .buttonAnswer {
   height: 60px;
-  width: 200px;
+  padding: 0 30px;
   margin: 10px;
   transform: scale(1);
   transition: transform 0.5s;
@@ -32,7 +32,6 @@
     &:hover {
       background-color: white;
       transform: scale(1);
-      transition: transform 0.5s;
     }
   }
   @media (max-width: 950px) {
@@ -41,16 +40,24 @@
   }
 }
 
-.disabled {
-  color: gray;
-  border-color: gray;
-  &:hover {
-    background-color: white;
-    transform: scale(1);
-    transition: transform 0.5s;
-  }
+.disabledF:disabled {
+  color: red;
 }
 
+.disabledR:disabled {
+  color: green;
+}
+
+
 .nextButton {
+  width: 200px;
   margin-top: 40px;
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
 }
