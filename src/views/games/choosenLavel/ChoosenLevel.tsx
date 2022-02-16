@@ -2,20 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import GroupButton from '../../../components/UI/groupButton/GroupButton';
-import cl from './ChosenLevel.module.scss';
+import cl from './ChoosenLevel.module.scss';
 import Button from '../../../components/UI/button/Button';
 import { ChosenGameProps } from '../../../types/gameTypes';
 import { setGameLevel } from '../../../store/actions/gameActions';
 
 interface ChooseDifficultyProps {
-  chosenGame: ChosenGameProps;
-  setChosenGame: React.Dispatch<React.SetStateAction<ChosenGameProps | null>>;
+  choosenGame: ChosenGameProps;
+  setChoosenGame: React.Dispatch<React.SetStateAction<ChosenGameProps | null>>;
   setIsGameStart: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function ChosenLevel({
-  chosenGame: { gameName, gameLink },
-  setChosenGame,
+export default function ChoosenLevel({
+  choosenGame: { gameName, gameLink },
+  setChoosenGame,
   setIsGameStart,
 }: ChooseDifficultyProps) {
   const [isChosenLevel, setIsChosenLevel] = useState<boolean>(false);
@@ -47,7 +47,7 @@ export default function ChosenLevel({
         <div className={cl.backBtn}>
           <Button
             clickHandler={() => {
-              setChosenGame(null);
+              setChoosenGame(null);
             }}
             content="Назад к играм"
           />

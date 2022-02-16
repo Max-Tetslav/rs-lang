@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Outlet, useLocation } from 'react-router-dom';
 import { GAMES } from '../../utils/constants/gamesConstants';
-import ChosenLevel from './choosenLavel/ChosenLevel';
+import ChosenLevel from './choosenLavel/ChoosenLevel';
 import GameCard from '../../components/UI/gameCard/gameCard';
 import { ChosenGameProps } from '../../types/gameTypes';
 import { setPageTitle } from '../../store/actions/pageTitleActions';
 import cl from './Games.module.scss';
 
 function Games(): JSX.Element {
-  const [chosenGame, setChosenGame] = useState<ChosenGameProps | null>(null);
+  const [choosenGame, setChoosenGame] = useState<ChosenGameProps | null>(null);
   const [isGameStart, setIsGameStart] = useState(false);
   const dispatch = useDispatch();
   const location = useLocation();
@@ -18,7 +18,7 @@ function Games(): JSX.Element {
     dispatch(setPageTitle('Мини-игры'));
     if (location.pathname === '/games') {
       setIsGameStart(false);
-      setChosenGame(null);
+      setChoosenGame(null);
     }
   }, [dispatch, location]);
 
@@ -27,14 +27,16 @@ function Games(): JSX.Element {
       {isGameStart && <Outlet />}
       {!isGameStart && (
         <>
-          {!chosenGame && (
+          {!choosenGame && (
             <div className={cl.container}>
               {GAMES.map(({ name, link, background, description }) => (
-                <GameCard name={name} link={link} img={background} description={description} setChosenGame={setChosenGame} />
+                <GameCard name={name} link={link} img={background} description={description} setChoosenGame={setChoosenGame} />
               ))}
             </div>
           )}
-          {chosenGame && <ChosenLevel chosenGame={chosenGame} setChosenGame={setChosenGame} setIsGameStart={setIsGameStart} />}
+          {choosenGame && (
+            <ChosenLevel choosenGame={choosenGame} setChoosenGame={setChoosenGame} setIsGameStart={setIsGameStart} />
+          )}
         </>
       )}
     </div>

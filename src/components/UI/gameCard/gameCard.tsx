@@ -9,12 +9,12 @@ interface GameCardProps {
   link: string;
   img: string;
   description: string;
-  setChosenGame: React.Dispatch<React.SetStateAction<ChosenGameProps | null>>;
+  setChoosenGame: React.Dispatch<React.SetStateAction<ChosenGameProps | null>>;
 }
 
-export default function GameCard({ name, link, img, description, setChosenGame }: GameCardProps) {
+export default function GameCard({ name, link, img, description, setChoosenGame }: GameCardProps) {
   const handlePlayButtonClick = () => {
-    setChosenGame({ gameName: name, gameLink: link });
+    setChoosenGame({ gameName: name, gameLink: link });
   };
   return (
     <Card key={name} className={`${cl.cardWrapper} ${cl.wrapper}`}>
