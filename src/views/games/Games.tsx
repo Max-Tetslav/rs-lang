@@ -5,14 +5,18 @@ import ChosenLevel from './choosenLavel/ChoosenLevel';
 import GameCard from '../../components/UI/gameCard/gameCard';
 import { ChosenGameProps } from '../../types/gameTypes';
 import cl from './Games.module.scss';
+import { useAppDispatch } from '../../utils/helpers/appHooks';
+import { update } from '../../store/reducers/pageTitleReducer';
 
 function Games(): JSX.Element {
   const [choosenGame, setChoosenGame] = useState<ChosenGameProps | null>(null);
   const [isGameStart, setIsGameStart] = useState(false);
+  const dispatch = useAppDispatch();
   const location = useLocation();
 
   useEffect(() => {
     if (location.pathname === '/games') {
+      dispatch(update('Мини-игры'));
       setIsGameStart(false);
       setChoosenGame(null);
     }
