@@ -10,6 +10,7 @@ interface IProps {
 
 function PageNumButton({ pageNum, clickHandler }: IProps): JSX.Element {
   const dispatch = useAppDispatch();
+
   return (
     <button
       className={cl.button}

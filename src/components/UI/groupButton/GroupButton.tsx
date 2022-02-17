@@ -16,6 +16,7 @@ export default function GroupButton({ group, setIsChosenLevel, setLevel }: IProp
     setIsChosenLevel(true);
     setLevel(group);
   };
+
   return (
     <button className={cl.groupButton} type="button" onClick={handleGroupClick}>
       <span className={cl.groupNumber}>{group + 1}</span>

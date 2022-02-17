@@ -17,7 +17,7 @@ function UnitMenuItem({ unitNum, setUnit, setPageNum, resetHardUnit }: IProps): 
     <button
       className={cl.button}
       type="button"
-      onClick={async () => {
+      onClick={() => {
         resetHardUnit(false);
         setPageNum(0);
         dispatch(updateLevel(Number(unitNum) - 1));

@@ -14,6 +14,7 @@ interface IProps {
 function GameLink({ title, gameLink }: IProps): JSX.Element {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
   return (
     <button
       className={cl.button}
