@@ -1,0 +1,128 @@
+.questionWrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 250px;
+  align-items: center;
+}
+
+.infoWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.iconWrapper {
+  width: 72px;
+  height: 72px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.buttonAudio {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: #fff;
+  border: 1px solid #007bff;
+  &:hover {
+    background-color: #4dabf5;
+    color: #fff;
+    transition: all 0.5s;
+    box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+    .volume {
+      filter: invert(99%) sepia(45%) saturate(2%) hue-rotate(139deg) brightness(108%) contrast(100%);
+      transition: all 0.5s;
+    }
+  }
+}
+
+.volume {
+  width: 100px;
+  height: 100px;
+  transition: all 0.5s;
+  filter: invert(35%) sepia(50%) saturate(5680%) hue-rotate(200deg) brightness(103%) contrast(103%);
+}
+
+.imgWord {
+  width: 300px;
+  height: 200px;
+  border-radius: 30px;
+  border: 2px solid #007bff;
+  margin-right: 30px;
+  @media (max-width: 950px) {
+    margin: 20px 0;
+  }
+  @media (max-width: 800px) {
+    width: 250px;
+    height: 150px;
+  }
+  @media (max-width: 650px) {
+    margin: 0;
+  }
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @media (max-width: 650px) {
+    flex-direction: column;
+  }
+}
+
+.wrapperTextInfo {
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+  @media (max-width: 600px) {
+    max-width: 300px;
+  }
+}
+
+.textInfo {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+  @media (max-width: 950px) {
+    justify-content: center;
+  }
+}
+
+.buttonAudioAnswer {
+  width: 30px;
+  height: 30px;
+  margin-right: 15px;
+  transform: scale(1);
+  transition: transform 0.5s;
+  &:hover {
+    transform: scale(1.1);
+    transition: transform 0.5s;
+    cursor: pointer;
+  }
+}
+
+.text {
+  margin-top: 10px;
+  padding-left: 10px;
+  font-size: 20px;
+  @media (max-width: 950px) {
+    font-size: 16px;
+  }
+}
+
+.textTranslate {
+  margin-left: 56px;
+  font-size: 20px;
+  @media (max-width: 950px) {
+    font-size: 16px;
+  }
+}

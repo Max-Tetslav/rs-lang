@@ -1,31 +1,45 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Grid } from '@material-ui/core';
+import { Outlet, useLocation } from 'react-router-dom';
 import { GAMES } from '../../utils/constants/gamesConstants';
-import ChosenLevel from './ChosenLavel/ChosenLevel';
+import ChosenLevel from './choosenLavel/ChoosenLevel';
 import GameCard from '../../components/UI/gameCard/gameCard';
 import { ChosenGameProps } from '../../types/gameTypes';
-import { setPageTitle } from '../../store/actions/pageTitleActions';
+import cl from './Games.module.scss';
+import { useAppDispatch } from '../../utils/helpers/appHooks';
+import { update } from '../../store/reducers/pageTitleReducer';
 
 function Games(): JSX.Element {
-  const [chosenGame, setChosenGame] = useState<ChosenGameProps | null>(null);
-  const dispatch = useDispatch();
+  const [choosenGame, setChoosenGame] = useState<ChosenGameProps | null>(null);
+  const [isGameStart, setIsGameStart] = useState(false);
+  const dispatch = useAppDispatch();
+  const location = useLocation();
 
   useEffect(() => {
-    dispatch(setPageTitle('Мини-игры'));
-  }, [dispatch]);
+    if (location.pathname === '/games') {
+      dispatch(update('Мини-игры'));
+      setIsGameStart(false);
+      setChoosenGame(null);
+    }
+  }, [location]);
 
   return (
-    <>
-      {!chosenGame && (
-        <Grid container direction="row" justifyContent="space-around" alignItems="center" style={{ height: '90%' }}>
-          {GAMES.map(({ name, link, background, description }) => (
-            <GameCard name={name} link={link} img={background} description={description} setChosenGame={setChosenGame} />
-          ))}
-        </Grid>
+    <div>
+      {isGameStart && <Outlet />}
+      {!isGameStart && (
+        <>
+          {!choosenGame && (
+            <div className={cl.container}>
+              {GAMES.map(({ name, link, background, description }) => (
+                <GameCard name={name} link={link} img={background} description={description} setChoosenGame={setChoosenGame} />
+              ))}
+            </div>
+          )}
+          {choosenGame && (
+            <ChosenLevel choosenGame={choosenGame} setChoosenGame={setChoosenGame} setIsGameStart={setIsGameStart} />
+          )}
+        </>
       )}
-      {chosenGame && <ChosenLevel chosenGame={chosenGame} setChosenGame={setChosenGame} />}
-    </>
+    </div>
   );
 }
 

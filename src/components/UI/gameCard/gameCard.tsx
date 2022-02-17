@@ -4,17 +4,17 @@ import cl from './gameCard.module.scss';
 import Button from '../button/Button';
 import { ChosenGameProps } from '../../../types/gameTypes';
 
-interface GameCardProps {
+interface IProps {
   name: string;
   link: string;
   img: string;
   description: string;
-  setChosenGame: React.Dispatch<React.SetStateAction<ChosenGameProps | null>>;
+  setChoosenGame: React.Dispatch<React.SetStateAction<ChosenGameProps | null>>;
 }
 
-export default function GameCard({ name, link, img, description, setChosenGame }: GameCardProps) {
+export default function GameCard({ name, link, img, description, setChoosenGame }: IProps): JSX.Element {
   const handlePlayButtonClick = () => {
-    setChosenGame({ gameName: name, gameLink: link });
+    setChoosenGame({ gameName: name, gameLink: link });
   };
   return (
     <Card key={name} className={`${cl.cardWrapper} ${cl.wrapper}`}>
