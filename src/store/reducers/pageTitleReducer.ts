@@ -1,15 +1,19 @@
-export const initialPageTitleState = {
-  title: 'Главная',
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { EPageTitles, IPageTitleState } from '../../types/pageTitleTypes';
+
+export const initialState: IPageTitleState = {
+  pageTitle: EPageTitles.home,
 };
 
-const pageTitleReducer = (state: any, action: any) => { // eslint-disable-line
-  if (action.type === 'SET_PAGE_TITLE') {
-    return {
-      ...state,
-      title: action.payload,
-    };
-  }
-  return state;
-};
+const pageTitleSlice = createSlice({
+  name: 'pageTitle',
+  initialState,
+  reducers: {
+    update(state, action: PayloadAction<string>) {
+      state.pageTitle = action.payload;
+    },
+  },
+});
 
-export default pageTitleReducer;
+export const { update } = pageTitleSlice.actions;
+export default pageTitleSlice.reducer;
