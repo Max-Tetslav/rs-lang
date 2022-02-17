@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { gameReducer } from './gameReducer';
+import gameReducer from './gameReducer';
 import pageTitleReducer from './pageTitleReducer';
 
 import usersReducer from './usersReducer';

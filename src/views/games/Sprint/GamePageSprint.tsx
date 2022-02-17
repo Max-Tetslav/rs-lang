@@ -1,13 +1,6 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { setPageTitle } from '../../../store/actions/pageTitleActions';
+import React from 'react';
 
 export default function Sprint() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(setPageTitle('Спринт'));
-  }, [dispatch]);
   return (
     <>
       <div>SSSSSSSSSSSSSSSSSSSSSS</div>

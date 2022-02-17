@@ -1,7 +1,7 @@
 import React from 'react';
 import cl from './Answers.module.scss';
 
-interface IParamButtonAnswer {
+interface IProps {
   handleAnswerClick: (response: string) => void;
   answer: string;
   index: number;
@@ -17,7 +17,7 @@ export default function AnswerButton({
   hasAnswer,
   rightAnswer,
   answerWord,
-}: IParamButtonAnswer) {
+}: IProps): JSX.Element {
   return (
     <div>
       {answerWord === answer ? (

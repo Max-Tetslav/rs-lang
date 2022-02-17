@@ -5,13 +5,14 @@ import playEnglishWord from '../../../utils/helpers/playEnglishWord';
 import sound from '../../../assets/svg/sound.svg';
 import deleteTags from '../../../utils/helpers/deleteTags';
 import firtsLetterToUpperCase from '../../../utils/helpers/firstLetterToUpperCase';
+import config from '../../../utils/config';
 
-interface AudioCallInfoProps {
+interface IProps {
   word: IWord | null;
   hasAnswer: boolean;
 }
 
-export default function AudioCallInfo({ word, hasAnswer }: AudioCallInfoProps) {
+export default function AudioCallInfo({ word, hasAnswer }: IProps): JSX.Element {
   const onPlay = () => {
     playEnglishWord(word?.audio);
   };
@@ -28,11 +29,7 @@ export default function AudioCallInfo({ word, hasAnswer }: AudioCallInfoProps) {
           </button>
         ) : (
           <div className={cl.wrapper}>
-            <img
-              className={cl.imgWord}
-              src={`https://dream-react-rslang-server.herokuapp.com/${word?.image}`}
-              alt={`https://dream-react-rslang-server.herokuapp.com/${word?.word}`}
-            />
+            <img className={cl.imgWord} src={`${config.apiUrl}/${word?.image}`} alt={`${word?.word}`} />
             <div className={cl.wrapperTextInfo}>
               <div className={cl.textInfo}>
                 <button type="button" className={cl.buttonAudioAnswer} onClick={onPlay}>

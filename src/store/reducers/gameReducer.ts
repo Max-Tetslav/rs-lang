@@ -1,19 +1,19 @@
-import { Reducer } from 'redux';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { StateGame } from '../../types/gameTypes';
 
-type Action = { type: string; payload: any }; // eslint-disable-line
-
-export const gameState: StateGame = {
+export const initialState: StateGame = {
   level: 0,
 };
-// eslint-disable-next-line
-export const gameReducer: Reducer<StateGame, Action> = (state = gameState, action) => {
-  if (action.type === 'SET_GAME_LEVEL') {
-    return {
-      ...state,
-      level: action.payload,
-    };
-  }
 
-  return state;
-};
+const gameSlice = createSlice({
+  name: 'levelGame',
+  initialState,
+  reducers: {
+    updateLevel(state, action: PayloadAction<number>) {
+      state.level = action.payload;
+    },
+  },
+});
+
+export const { updateLevel } = gameSlice.actions;
+export default gameSlice.reducer;

@@ -1,30 +1,33 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import GroupButton from '../../../components/UI/groupButton/GroupButton';
 import cl from './ChoosenLevel.module.scss';
 import Button from '../../../components/UI/button/Button';
 import { ChosenGameProps } from '../../../types/gameTypes';
-import { setGameLevel } from '../../../store/actions/gameActions';
+import { useAppDispatch } from '../../../utils/helpers/appHooks';
+import { updateLevel } from '../../../store/reducers/gameReducer';
+import { update } from '../../../store/reducers/pageTitleReducer';
 
-interface ChooseDifficultyProps {
+interface IProps {
   choosenGame: ChosenGameProps;
   setChoosenGame: React.Dispatch<React.SetStateAction<ChosenGameProps | null>>;
   setIsGameStart: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+const COUNT_GROUP = 6;
+
 export default function ChoosenLevel({
   choosenGame: { gameName, gameLink },
   setChoosenGame,
   setIsGameStart,
-}: ChooseDifficultyProps) {
+}: IProps): JSX.Element {
   const [isChosenLevel, setIsChosenLevel] = useState<boolean>(false);
   const [level, setLevel] = useState(0);
   const navigation = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const getGroupButtons = () => {
     const groupButtons = [];
-    for (let i = 0; i < 6; i += 1) {
+    for (let i = 0; i < COUNT_GROUP; i += 1) {
       groupButtons.push(<GroupButton key={i} group={i} setIsChosenLevel={setIsChosenLevel} setLevel={setLevel} />);
     }
     return groupButtons;
@@ -32,9 +35,10 @@ export default function ChoosenLevel({
 
   useEffect(() => {
     if (isChosenLevel) {
-      dispatch(setGameLevel(level));
+      dispatch(updateLevel(level));
       navigation(gameLink);
       setIsGameStart(true);
+      dispatch(update(gameName));
     }
   }, [isChosenLevel, gameLink, navigation]);
 

@@ -6,14 +6,15 @@ import cl from './Results.module.scss';
 import sound from '../../../assets/svg/sound.svg';
 import Button from '../button/Button';
 
-interface IResultsProps {
+interface IProps {
   setIsResultsShow: (isResultsShow: boolean) => void;
   wrongAnswers: (IWord | null)[];
   rightAnswers: (IWord | null)[];
   setWrongAnswers: (wrongAnswers: (IWord | null)[]) => void;
   setRightAnswers: (rightAnswers: (IWord | null)[]) => void;
 }
-function Results({ setIsResultsShow, wrongAnswers, rightAnswers, setRightAnswers, setWrongAnswers }: IResultsProps) {
+
+function Results({ setIsResultsShow, wrongAnswers, rightAnswers, setRightAnswers, setWrongAnswers }: IProps): JSX.Element {
   const navigation = useNavigate();
   return (
     <div className={cl.wrapper}>

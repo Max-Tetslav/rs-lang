@@ -8,14 +8,17 @@ import { PAGE_NUMBER } from '../../../utils/constants/gamesConstants';
 import playEnglishWord from '../../../utils/helpers/playEnglishWord';
 import cl from './AudioCallContent.module.scss';
 
-interface IGameProps {
+interface IProps {
   setGameRightAnswers: React.Dispatch<React.SetStateAction<(IWord | null)[]>>;
   setGameWrongAnswers: React.Dispatch<React.SetStateAction<(IWord | null)[]>>;
   setIsResultsShow: React.Dispatch<React.SetStateAction<boolean>>;
   level: number;
 }
 
-function AudioCallContent({ setGameRightAnswers, setGameWrongAnswers, setIsResultsShow, level }: IGameProps) {
+const COUNT_ANSWERS = 3;
+const RANDOM_SORT_COEFFICIENT = 0.5;
+
+function AudioCallContent({ setGameRightAnswers, setGameWrongAnswers, setIsResultsShow, level }: IProps): JSX.Element {
   const [words, setWords] = useState<IWord[] | []>([]);
   const [word, setWord] = useState<IWord | null>(null);
   const [playedWords, setPlayedWords] = useState<string[]>([]);
@@ -27,14 +30,14 @@ function AudioCallContent({ setGameRightAnswers, setGameWrongAnswers, setIsResul
 
   const getVariantsAnswers = (randomWord: IWord) => {
     let arrAnswers: string[] = [randomWord?.wordTranslate];
-    for (let i = 0; i < 3; i += 1) {
+    for (let i = 0; i < COUNT_ANSWERS; i += 1) {
       let randomResponse = words[Math.floor(Math.random() * words.length)];
       while (arrAnswers.includes(randomResponse.wordTranslate)) {
         randomResponse = words[Math.floor(Math.random() * words.length)];
       }
       arrAnswers = [...arrAnswers, randomResponse.wordTranslate];
     }
-    arrAnswers.sort(() => Math.random() - 0.5);
+    arrAnswers.sort(() => Math.random() - RANDOM_SORT_COEFFICIENT);
     setVariantsAnswers(arrAnswers);
   };
 

@@ -1,23 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
 import Results from '../../../components/UI/results/Results';
-import { setPageTitle } from '../../../store/actions/pageTitleActions';
 import { IWord } from '../../../types/wordTypes';
 import AudioCallContent from '../../../components/layout/AudioCallContent/AudioCallContent';
 import cl from './GamePageAudioCall.module.scss';
+import { useAppSelector } from '../../../utils/helpers/appHooks';
 
-const selectGameLevel = (state: any) => state.games.level; // eslint-disable-line
-
-function AudioCall() {
-  const dispatch = useDispatch();
-  const level = useSelector(selectGameLevel);
+function AudioCall(): JSX.Element {
+  const level = useAppSelector((state) => state.games.level);
   const [gameRightAnswers, setGameRightAnswers] = useState<(IWord | null)[] | []>([]);
   const [gameWrongAnswers, setGameWrongAnswers] = useState<(IWord | null)[] | []>([]);
   const [isResultsShow, setIsResultsShow] = useState(false);
-
-  useEffect(() => {
-    dispatch(setPageTitle('Аудиовызов'));
-  }, [dispatch]);
 
   return (
     <div className={cl.audioGameContainer}>
