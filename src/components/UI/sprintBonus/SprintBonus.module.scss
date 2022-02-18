@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bonus__value {
+  font-size: 16px;
+  line-height: 19px;
+  text-transform: uppercase;
+  color: #1c658c;
+}
+
+.bonus__item {
+  width: 30px;
+  height: 30px;
+
+  &_1 {
+    background: #9fc3d8;
+  }
+
+  &_2 {
+    background: #398ab9;
+  }
+
+  &_3 {
+    background: #1c658c;
+  }
+}

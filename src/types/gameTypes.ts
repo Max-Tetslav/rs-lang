@@ -6,4 +6,3 @@ export interface ChosenGameProps {
 export interface StateGame {
   level: number;
 }
-

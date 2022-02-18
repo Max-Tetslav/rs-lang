@@ -19,3 +19,5 @@ export const GAMES = [
 export default GAMES;
 
 export const PAGE_NUMBER = 30;
+
+export const WORDS_PER_PAGE = 20;
