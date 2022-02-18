@@ -10,6 +10,7 @@ function AudioCall(): JSX.Element {
   const [gameRightAnswers, setGameRightAnswers] = useState<(IWord | null)[] | []>([]);
   const [gameWrongAnswers, setGameWrongAnswers] = useState<(IWord | null)[] | []>([]);
   const [isResultsShow, setIsResultsShow] = useState(false);
+  const [seriesWords, setSeriesWords] = useState(0);
 
   return (
     <div className={cl.audioGameContainer}>
@@ -19,6 +20,8 @@ function AudioCall(): JSX.Element {
           setIsResultsShow={setIsResultsShow}
           setGameRightAnswers={setGameRightAnswers}
           setGameWrongAnswers={setGameWrongAnswers}
+          seriesWords={seriesWords}
+          setSeriesWords={setSeriesWords}
         />
       ) : (
         <Results
@@ -27,6 +30,7 @@ function AudioCall(): JSX.Element {
           wrongAnswers={gameWrongAnswers}
           setRightAnswers={setGameRightAnswers}
           setWrongAnswers={setGameWrongAnswers}
+          seriesWords={seriesWords}
         />
       )}
     </div>

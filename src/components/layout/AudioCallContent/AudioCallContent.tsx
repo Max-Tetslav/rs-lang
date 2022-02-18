@@ -13,12 +13,21 @@ interface IProps {
   setGameWrongAnswers: React.Dispatch<React.SetStateAction<(IWord | null)[]>>;
   setIsResultsShow: React.Dispatch<React.SetStateAction<boolean>>;
   level: number;
+  seriesWords: number;
+  setSeriesWords: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const COUNT_ANSWERS = 3;
 const RANDOM_SORT_COEFFICIENT = 0.5;
 
-function AudioCallContent({ setGameRightAnswers, setGameWrongAnswers, setIsResultsShow, level }: IProps): JSX.Element {
+function AudioCallContent({
+  setGameRightAnswers,
+  setGameWrongAnswers,
+  setIsResultsShow,
+  level,
+  seriesWords,
+  setSeriesWords,
+}: IProps): JSX.Element {
   const [words, setWords] = useState<IWord[] | []>([]);
   const [word, setWord] = useState<IWord | null>(null);
   const [playedWords, setPlayedWords] = useState<string[]>([]);
@@ -27,6 +36,7 @@ function AudioCallContent({ setGameRightAnswers, setGameWrongAnswers, setIsResul
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [rightAnswer, setRightAnswer] = useState<string | []>('');
   const [answerWord, setAnswerWord] = useState<string | []>('');
+  const [series, setSeries] = useState(0);
 
   const getVariantsAnswers = (randomWord: IWord) => {
     let arrAnswers: string[] = [randomWord?.wordTranslate];
@@ -73,8 +83,15 @@ function AudioCallContent({ setGameRightAnswers, setGameWrongAnswers, setIsResul
     if (answer === word?.wordTranslate) {
       setGameRightAnswers((prev) => [...prev, word]);
       setRightAnswer(answer);
+      setSeries(series + 1);
     } else {
       setGameWrongAnswers((prev) => [...prev, word]);
+      if (seriesWords < series) {
+        setSeriesWords(series);
+        setSeries(0);
+      } else {
+        setSeries(0);
+      }
     }
   };
 
@@ -108,6 +125,9 @@ function AudioCallContent({ setGameRightAnswers, setGameWrongAnswers, setIsResul
       }
     } else {
       setIsResultsShow(true);
+      if (seriesWords < series) {
+        setSeriesWords(series);
+      }
     }
   };
 

@@ -5,6 +5,9 @@ import playEnglishWord from '../../../utils/helpers/playEnglishWord';
 import cl from './Results.module.scss';
 import sound from '../../../assets/svg/sound.svg';
 import Button from '../button/Button';
+import { IStatsGame } from '../../../types/statsTypes';
+import { useAppDispatch, useAppSelector } from '../../../utils/helpers/appHooks';
+import { addStats } from '../../../store/reducers/statsReduser';
 
 interface IProps {
   setIsResultsShow: (isResultsShow: boolean) => void;
@@ -12,10 +15,32 @@ interface IProps {
   rightAnswers: (IWord | null)[];
   setWrongAnswers: (wrongAnswers: (IWord | null)[]) => void;
   setRightAnswers: (rightAnswers: (IWord | null)[]) => void;
+  seriesWords: number;
 }
 
-function Results({ setIsResultsShow, wrongAnswers, rightAnswers, setRightAnswers, setWrongAnswers }: IProps): JSX.Element {
+function Results({
+  setIsResultsShow,
+  wrongAnswers,
+  rightAnswers,
+  setRightAnswers,
+  setWrongAnswers,
+  seriesWords,
+}: IProps): JSX.Element {
   const navigation = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const statistics: IStatsGame = {
+    nameGame: useAppSelector((state) => state.title.pageTitle),
+    day: new Date(),
+    wordsTrue: rightAnswers.length,
+    wordsFalse: wrongAnswers.length,
+    seriesTrueAnswers: seriesWords,
+  };
+
+  dispatch(addStats(statistics));
+  const st = useAppSelector((state) => state.stats.statistics);
+  localStorage.setItem('statistics', JSON.stringify(st));
+
   return (
     <div className={cl.wrapper}>
       <div className={cl.background}>
