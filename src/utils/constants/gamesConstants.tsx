@@ -5,13 +5,13 @@ export const GAMES = [
   {
     name: 'Спринт',
     description: 'Выберите соответсвует ли перевод предложенному слову',
-    link: '/games/sprint',
+    link: 'sprint',
     background: sprintImg,
   },
   {
     name: 'Аудиовызов',
     description: 'Выберите перевод услышанного слова',
-    link: '/games/audiocall',
+    link: 'audiocall',
     background: audioImg,
   },
 ];

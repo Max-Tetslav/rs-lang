@@ -4,6 +4,8 @@ export enum EPageTitles {
   games = 'Мини-Игры',
   stats = 'Статистика',
   team = 'Команда',
+  audiocall = 'Аудиовызов',
+  sprint = 'Спринт',
 }
 
 export enum EPageUrls {
@@ -12,6 +14,8 @@ export enum EPageUrls {
   games = 'games',
   stats = 'stats',
   team = 'team',
+  audiocall = 'audiocall',
+  sprint = 'sprint',
 }
 
 export interface IPageTitleState {

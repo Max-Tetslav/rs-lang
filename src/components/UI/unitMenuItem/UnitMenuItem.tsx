@@ -1,4 +1,6 @@
 import React from 'react';
+import { updateLevel } from '../../../store/reducers/gameReducer';
+import { useAppDispatch } from '../../../utils/helpers/appHooks';
 import cl from './UnitMenuItem.module.scss';
 
 interface IProps {
@@ -9,6 +11,8 @@ interface IProps {
 }
 
 function UnitMenuItem({ unitNum, setUnit, setPageNum, resetHardUnit }: IProps): JSX.Element {
+  const dispatch = useAppDispatch();
+
   return (
     <button
       className={cl.button}
@@ -16,6 +20,7 @@ function UnitMenuItem({ unitNum, setUnit, setPageNum, resetHardUnit }: IProps): 
       onClick={() => {
         resetHardUnit(false);
         setPageNum(0);
+        dispatch(updateLevel(Number(unitNum) - 1));
         setUnit(Number(unitNum) - 1);
       }}
     >
