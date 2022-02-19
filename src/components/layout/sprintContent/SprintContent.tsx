@@ -15,16 +15,24 @@ interface IProps {
   setGameWrongAnswers: React.Dispatch<React.SetStateAction<(IWord | null)[]>>;
   setIsResultsShow: React.Dispatch<React.SetStateAction<boolean>>;
   level: number;
+  words: Array<IWord>;
+  setWords: React.Dispatch<React.SetStateAction<IWord[]>>;
 }
 
 interface IAnswers {
   [key: number]: Array<string>;
 }
 
-function SprintContent({ setGameRightAnswers, setGameWrongAnswers, setIsResultsShow, level }: IProps): JSX.Element {
+function SprintContent({
+  setGameRightAnswers,
+  setGameWrongAnswers,
+  setIsResultsShow,
+  level,
+  words,
+  setWords,
+}: IProps): JSX.Element {
   const [value, setValue] = useState<number>(60);
   const [score, setscore] = useState<number>(0);
-  const [words, setWords] = useState<IWord[] | []>([]);
   const [answers, setAnswers] = useState<IAnswers | null>(null);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [word, setWord] = useState<IWord | null>(null);
@@ -34,7 +42,7 @@ function SprintContent({ setGameRightAnswers, setGameWrongAnswers, setIsResultsS
   const [bonus, setBonus] = useState<number>(1);
   const [countRightAnswers, setCountRightAnswers] = useState<number>(0);
   const [itemsBonus, setItemsBonus] = useState<Array<number>>([]);
-  const [changePage, setChangePage] = useState(true);
+  const [changePage, setChangePage] = useState(false);
 
   const getRandomWord = () => {
     return words[Math.floor(Math.random() * words.length)];
@@ -63,8 +71,9 @@ function SprintContent({ setGameRightAnswers, setGameWrongAnswers, setIsResultsS
         if (countRightAnswers <= 3) {
           if (bonus === 8) {
             setCountRightAnswers(1);
+          } else {
+            setCountRightAnswers(countRightAnswers + 1);
           }
-          setCountRightAnswers(countRightAnswers + 1);
         } else {
           setCountRightAnswers(1);
         }
@@ -99,16 +108,20 @@ function SprintContent({ setGameRightAnswers, setGameWrongAnswers, setIsResultsS
         setIndex(0);
         setIsDataLoaded(true);
       });
+      setChangePage(false);
     }
-    setChangePage(false);
   }, [changePage]);
+
+  useEffect(() => {
+    setIsDataLoaded(true);
+  }, []);
 
   useEffect(() => {
     if (isDataLoaded) {
       setAnswerWord(answers![index][Math.floor(Math.random() * 2)]);
       setWord(words[index]);
+      setIsDataLoaded(false);
     }
-    setIsDataLoaded(false);
   }, [answers]);
 
   useEffect(() => {
@@ -136,8 +149,8 @@ function SprintContent({ setGameRightAnswers, setGameWrongAnswers, setIsResultsS
   useEffect(() => {
     if (hasAnswer) {
       setscore(score + bonus * 10);
+      setHasAnswer(false);
     }
-    setHasAnswer(false);
   }, [hasAnswer]);
 
   return (
