@@ -1,18 +1,21 @@
-import React from 'react';
+import React, { JSXElementConstructor } from 'react';
 import cl from './SprintBonus.module.scss';
 
 interface IProps {
   bonus: number;
-  itemsBonus: Array<number>;
+  seriesOfAnswers: number;
 }
 
-function SprintBonus({ bonus, itemsBonus }: IProps): JSX.Element {
+function SprintBonus({ bonus, seriesOfAnswers }: IProps): JSX.Element {
+  const stars = [];
+  for (let i = 0; i < seriesOfAnswers; i += 1) {
+    stars.push(<div className={cl.bonus__item} />);
+  }
+
   return (
     <div className={cl.container}>
       <div className={cl.bonus__value}>x{bonus}</div>
-      {itemsBonus.map((item) => {
-        return <div className={[cl.bonus__item, cl[`bonus__item_${item + 1}`]].join(' ')} />;
-      })}
+      <div className={cl.bonus}>{stars}</div>
     </div>
   );
 }

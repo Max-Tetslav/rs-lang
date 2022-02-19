@@ -13,6 +13,11 @@
   line-height: 19px;
   text-transform: uppercase;
   color: #ffffff;
+  transition: 0.5s all;
+  &:hover {
+    transition: 0.5s all;
+    transform: scale(1.2);
+  }
   &_wrong {
     background: #8c1c1c;
   }

@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { getWords } from '../../../services/userService';
-import { PAGE_NUMBER, WORDS_PER_PAGE } from '../../../utils/constants/gamesConstants';
+import {
+  INCREASE_BONUS,
+  MAX_BONUS,
+  MAX_RIGHT_ANSWER,
+  MULTIPLY_BONUS,
+  PAGE_NUMBER,
+  SERIES_OF_ANSWER,
+  WORDS_PER_PAGE,
+} from '../../../utils/constants/gamesConstants';
 
 import { IWord } from '../../../types/wordTypes';
 import SprintButton from '../../UI/sprintButton/SprintButton';
@@ -43,6 +51,7 @@ function SprintContent({
   const [countRightAnswers, setCountRightAnswers] = useState<number>(0);
   const [itemsBonus, setItemsBonus] = useState<Array<number>>([]);
   const [changePage, setChangePage] = useState(false);
+  const [seriesOfAnswers, setSeriesOfAnswers] = useState<number>(1);
 
   const getRandomWord = () => {
     return words[Math.floor(Math.random() * words.length)];
@@ -68,8 +77,8 @@ function SprintContent({
       if ((word?.wordTranslate === answerWord) === flag) {
         setHasAnswer(true);
         setGameRightAnswers((prev) => [...prev, word]);
-        if (countRightAnswers <= 3) {
-          if (bonus === 8) {
+        if (countRightAnswers < MAX_RIGHT_ANSWER) {
+          if (bonus === MAX_BONUS) {
             setCountRightAnswers(1);
           } else {
             setCountRightAnswers(countRightAnswers + 1);
@@ -80,6 +89,7 @@ function SprintContent({
       } else {
         setGameWrongAnswers((prev) => [...prev, word]);
         setCountRightAnswers(0);
+        setSeriesOfAnswers(1);
         setBonus(1);
         setHasAnswer(false);
       }
@@ -138,8 +148,11 @@ function SprintContent({
   }, [index]);
 
   useEffect(() => {
-    if (countRightAnswers === 4) {
-      setBonus(bonus * 2);
+    if (countRightAnswers === MAX_RIGHT_ANSWER) {
+      setBonus(bonus * INCREASE_BONUS);
+      if (seriesOfAnswers !== SERIES_OF_ANSWER) {
+        setSeriesOfAnswers(seriesOfAnswers + 1);
+      }
       createItemsBonus(0);
     } else {
       createItemsBonus(countRightAnswers);
@@ -148,15 +161,15 @@ function SprintContent({
 
   useEffect(() => {
     if (hasAnswer) {
-      setscore(score + bonus * 10);
+      setscore(score + bonus * MULTIPLY_BONUS);
       setHasAnswer(false);
     }
   }, [hasAnswer]);
 
   return (
     <div className={cl.container}>
-      <SprintHeader time={value} score={score} />
-      <SprintBonus bonus={bonus} itemsBonus={itemsBonus} />
+      <SprintHeader time={value} score={score} countRightAnswers={MAX_RIGHT_ANSWER} itemsBonus={itemsBonus} bonus={bonus} />
+      <SprintBonus bonus={bonus} seriesOfAnswers={seriesOfAnswers} />
       <SprintWords wordEn={word?.word} wordRu={answerWord} />
       <SprintButton checkAnswer={checkAnswer} />
     </div>

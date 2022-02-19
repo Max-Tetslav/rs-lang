@@ -21,3 +21,13 @@ export default GAMES;
 export const PAGE_NUMBER = 30;
 
 export const WORDS_PER_PAGE = 20;
+
+export const MAX_RIGHT_ANSWER = 4;
+
+export const MAX_BONUS = 4;
+
+export const MULTIPLY_BONUS = 10;
+
+export const SERIES_OF_ANSWER = 4;
+
+export const INCREASE_BONUS = 2;
