@@ -21,9 +21,16 @@
   p:nth-child(1) {
     border-color: #ce0000;
   }
-  button:not(:last-child) {
-    border-color: #ce0000;
-    background-color: rgba(243, 123, 123, 0.2);
+}
+
+.learnedWord {
+  border-color: #00af2c;
+  background-color: rgba(19, 163, 0, 0.2);
+  img {
+    border-color: #00af2c;
+  }
+  p:nth-child(1) {
+    border-color: #00af2c;
   }
 }
 
@@ -74,7 +81,7 @@
   justify-content: center;
   align-items: center;
   transition: all 0.3s ease;
-  background-color: white;
+  background-color: inherit;
   img {
     width: 24px;
   }
@@ -103,9 +110,9 @@
 }
 
 .checkBtn {
-  border: 2px solid #43d400;
+  border: 2px solid #00af2c;
   &:hover {
-    background-color: #43d400;
+    background-color: #45b160;
   }
 }
 
@@ -118,4 +125,8 @@
 
 .paintHardBtn {
   background-color: #f32b4c;
+}
+
+.paintLearnedBtn {
+  background-color: #45b160;
 }
