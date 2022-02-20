@@ -6,11 +6,11 @@ import { getWords } from '../../../services/userService';
 import { IWord } from '../../../types/wordTypes';
 import { PAGE_NUMBER } from '../../../utils/constants/gamesConstants';
 import { useAppSelector } from '../../../utils/helpers/appHooks';
-import getRandomPageNum from '../../../utils/helpers/getRandomPageNum';
 import cl from './GamePageSprint.module.scss';
 
 export default function Sprint(): JSX.Element {
   const level = useAppSelector((state) => state.games.level);
+  const page = useAppSelector((state) => state.games.page);
   const [gameRightAnswers, setGameRightAnswers] = useState<(IWord | null)[] | []>([]);
   const [gameWrongAnswers, setGameWrongAnswers] = useState<(IWord | null)[] | []>([]);
   const [isResultsShow, setIsResultsShow] = useState(false);
@@ -18,7 +18,7 @@ export default function Sprint(): JSX.Element {
   const [words, setWords] = useState<IWord[] | []>([]);
 
   useEffect(() => {
-    getWords(getRandomPageNum(), level).then((data) => {
+    getWords(page, level).then((data) => {
       setWords(data);
     });
   }, []);

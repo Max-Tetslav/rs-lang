@@ -5,4 +5,6 @@ export interface ChosenGameProps {
 
 export interface StateGame {
   level: number;
+  page: number;
+  isGameStart: boolean;
 }

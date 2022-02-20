@@ -4,22 +4,21 @@ import AudioCallInfo from '../../UI/audioCallInfo/AudioCallInfo';
 import LoadingWordList from '../../UI/loadingWordList/LoadingWordList';
 import { getWords } from '../../../services/userService';
 import { IWord } from '../../../types/wordTypes';
-import { PAGE_NUMBER } from '../../../utils/constants/gamesConstants';
 import playEnglishWord from '../../../utils/helpers/playEnglishWord';
 import cl from './AudioCallContent.module.scss';
-import getRandomPageNum from '../../../utils/helpers/getRandomPageNum';
 
 interface IProps {
   setGameRightAnswers: React.Dispatch<React.SetStateAction<(IWord | null)[]>>;
   setGameWrongAnswers: React.Dispatch<React.SetStateAction<(IWord | null)[]>>;
   setIsResultsShow: React.Dispatch<React.SetStateAction<boolean>>;
   level: number;
+  page: number;
 }
 
 const COUNT_ANSWERS = 3;
 const RANDOM_SORT_COEFFICIENT = 0.5;
 
-function AudioCallContent({ setGameRightAnswers, setGameWrongAnswers, setIsResultsShow, level }: IProps): JSX.Element {
+function AudioCallContent({ setGameRightAnswers, setGameWrongAnswers, setIsResultsShow, level, page }: IProps): JSX.Element {
   const [words, setWords] = useState<IWord[] | []>([]);
   const [word, setWord] = useState<IWord | null>(null);
   const [playedWords, setPlayedWords] = useState<string[]>([]);
@@ -52,7 +51,7 @@ function AudioCallContent({ setGameRightAnswers, setGameWrongAnswers, setIsResul
   };
 
   useEffect(() => {
-    getWords(getRandomPageNum(), level).then((data) => {
+    getWords(page, level).then((data) => {
       setWords(data);
       setIsDataLoaded(true);
     });

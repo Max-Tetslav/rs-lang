@@ -11,7 +11,7 @@ import NotFound from './views/notFound/NotFound';
 import Root from './views/Root';
 import Stats from './views/stats/Stats';
 import Team from './views/team/Team';
-import AudioCall from './views/games/AudioCall/GamePageAudioCall';
+import AudioCall from './views/games/audioCall/GamePageAudioCall';
 
 function App(): JSX.Element {
   return (

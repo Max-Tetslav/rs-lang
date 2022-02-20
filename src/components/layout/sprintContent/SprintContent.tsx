@@ -5,9 +5,7 @@ import {
   MAX_BONUS,
   MAX_RIGHT_ANSWER,
   MULTIPLY_BONUS,
-  PAGE_NUMBER,
   SERIES_OF_ANSWER,
-  WORDS_PER_PAGE,
 } from '../../../utils/constants/gamesConstants';
 
 import { IWord } from '../../../types/wordTypes';
@@ -17,7 +15,8 @@ import cl from './SprintContent.module.scss';
 import SprintWords from '../../UI/sprintWords/SprintWords';
 import SprintBonus from '../../UI/sprintBonus/SprintBonus';
 import SprintHeader from '../../UI/sprintHeader/SprintHeader';
-import getRandomPageNum from '../../../utils/helpers/getRandomPageNum';
+import { updatePage } from '../../../store/reducers/gameReducer';
+import { useAppDispatch, useAppSelector } from '../../../utils/helpers/appHooks';
 
 interface IProps {
   setGameRightAnswers: React.Dispatch<React.SetStateAction<(IWord | null)[]>>;
@@ -53,6 +52,9 @@ function SprintContent({
   const [itemsBonus, setItemsBonus] = useState<Array<number>>([]);
   const [changePage, setChangePage] = useState(false);
   const [seriesOfAnswers, setSeriesOfAnswers] = useState<number>(1);
+  const [page, setPage] = useState(useAppSelector((state) => state.games.page) + 1);
+
+  const dispatch = useAppDispatch();
 
   const getRandomWord = () => {
     return words[Math.floor(Math.random() * words.length)];
@@ -114,11 +116,12 @@ function SprintContent({
 
   useEffect(() => {
     if (changePage) {
-      getWords(getRandomPageNum(), level).then((data) => {
+      getWords(page, level).then((data) => {
         setWords(data);
         setIndex(0);
         setIsDataLoaded(true);
       });
+      setPage(page + 1);
       setChangePage(false);
     }
   }, [changePage]);
