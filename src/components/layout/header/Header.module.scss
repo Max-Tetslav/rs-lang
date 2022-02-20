@@ -7,7 +7,7 @@
   height: 10%;
   padding-left: 2%;
   padding-right: 2%;
-  margin-left: 60px;
+  margin-left: 75px;
 }
 
 .signIn {
@@ -29,4 +29,8 @@
   display: flex;
   align-items: center;
   column-gap: 40px;
+
+  h4 {
+    margin-bottom: 0;
+  }
 }

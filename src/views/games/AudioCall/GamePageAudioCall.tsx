@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Results from '../../../components/UI/results/Results';
 import { IWord } from '../../../types/wordTypes';
-import AudioCallContent from '../../../components/layout/audioCallContent/AudioCallContent';
+import AudioCallContent from '../../../components/layout/audiocallContent/AudioCallContent';
 import cl from './GamePageAudioCall.module.scss';
 import { useAppSelector } from '../../../utils/helpers/appHooks';
 

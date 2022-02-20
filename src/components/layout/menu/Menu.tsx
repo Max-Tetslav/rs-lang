@@ -7,12 +7,12 @@ import teamSvg from '../../../assets/svg/team.svg';
 import gamesSvg from '../../../assets/svg/games-menu.svg';
 
 import MenuItem from '../../UI/menuItem/MenuItem';
-import MenuBtn from '../../UI/menuBtn/MenuBtn';
+import MenuLogo from '../../UI/menuLogo/MenuLogo';
 
 function Menu(): JSX.Element {
   return (
     <aside className={cl.menuContainer}>
-      <MenuBtn />
+      <MenuLogo />
       <nav>
         <ul className={cl.linkList}>
           <MenuItem icon={homeSvg} alt="home-icon" href="/" />
