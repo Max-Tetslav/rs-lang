@@ -1,6 +1,5 @@
-import { update } from '../store/reducers/pageTitleReducer';
 import { ILogin, IRequest, IUser } from '../types/userTypes';
-import { IUserWordData, IWord } from '../types/wordTypes';
+import { IUserWord, IUserWordData, IWord } from '../types/wordTypes';
 import config from '../utils/config';
 import authHeader from '../utils/helpers/authHeader';
 
@@ -116,4 +115,30 @@ export async function isAlreadyHardUserWord(userId: string, wordId: string): Pro
 
 export async function deleteHardWordInHardUnit(userId: string, wordId: string): Promise<void> {
   updateUserWord(userId, wordId, { difficulty: 'easy' });
+}
+
+export async function getUserLearnedWords(): Promise<[{ paginatedResults: IUserWord[] }]> {
+  const authId = localStorage.getItem('userData')
+    ? (JSON.parse(localStorage.getItem('userData') as string).userId as string)
+    : '';
+  const querryParams = '?wordsPerPage=3600&filter=%7B%22userWord.optional.isLearned%22%3Atrue%7D';
+  const request = await fetch(`${config.apiUrl}/users/${authId}/aggregatedWords/${querryParams}`, setRequest());
+  const response = await request.json();
+
+  return response;
+}
+
+export async function isAlreadyLearnedUserWord(userId: string, wordId: string): Promise<void> {
+  const userWordsDataList = await getUserWords(userId);
+  const isAlreadyUserWord = Boolean(userWordsDataList.filter((item) => item.wordId === wordId).length);
+  const userWordList = await getUserLearnedWords();
+  const isWordLearned = Boolean(userWordList[0].paginatedResults.filter((item) => item.userWord.optional.isLearned).length);
+
+  if (isAlreadyUserWord && isWordLearned) {
+    await updateUserWord(userId, wordId, { optional: { isLearned: false } });
+  } else if (isAlreadyUserWord && !isWordLearned) {
+    await updateUserWord(userId, wordId, { difficulty: 'easy', optional: { isLearned: true } });
+  } else {
+    await createUserWord(userId, wordId, { difficulty: 'easy', optional: { isLearned: true } });
+  }
 }

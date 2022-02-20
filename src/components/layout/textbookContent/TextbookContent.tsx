@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import useFetching from '../../../hooks/useFetching';
-import { getUserHardWords, getWords } from '../../../services/userService';
+import { getUserHardWords, getUserLearnedWords, getWords } from '../../../services/userService';
 import { IWord } from '../../../types/wordTypes';
 import cl from './TextbookContent.module.scss';
 
 import WordsList from '../wordsList/WordsList';
 import LoadingWordList from '../../UI/loadingWordList/LoadingWordList';
 import { useAppDispatch, useAppSelector } from '../../../utils/helpers/appHooks';
-import { update } from '../../../store/reducers/words';
+import { updateHardWords, updateLearnedWords } from '../../../store/reducers/wordsReducer';
 
 interface IProps {
   unitNum: number;
@@ -20,6 +20,9 @@ function TextbookContent({ unitNum, page, changePage, isHardUnit }: IProps): JSX
   const [words, setWords] = useState([] as IWord[]);
   const dispatch = useAppDispatch();
   const hardWords = useAppSelector((state) => state.words.hardWords);
+  const authId = localStorage.getItem('userData')
+    ? (JSON.parse(localStorage.getItem('userData') as string).userId as string)
+    : '';
 
   const [fetchWords, isWordsLoading, wordsError] = useFetching(async () => {
     if (isHardUnit) {
@@ -31,8 +34,11 @@ function TextbookContent({ unitNum, page, changePage, isHardUnit }: IProps): JSX
   });
 
   useMemo(() => {
-    getUserHardWords().then((data) => dispatch(update(data[0].paginatedResults)));
-  }, []);
+    if (authId) {
+      getUserHardWords().then((data) => dispatch(updateHardWords(data[0].paginatedResults)));
+      getUserLearnedWords().then((data) => dispatch(updateLearnedWords(data[0].paginatedResults)));
+    }
+  }, [authId]);
 
   useEffect(() => {
     fetchWords();

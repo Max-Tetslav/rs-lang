@@ -9,9 +9,15 @@ import deleteTags from '../../../utils/helpers/deleteTags';
 import firtsLetterToUpperCase from '../../../utils/helpers/firstLetterToUpperCase';
 import config from '../../../utils/config';
 import { useAppDispatch, useAppSelector } from '../../../utils/helpers/appHooks';
-import { getUserHardWords, isAlreadyHardUserWord } from '../../../services/userService';
+import {
+  deleteHardWordInHardUnit,
+  getUserHardWords,
+  getUserLearnedWords,
+  isAlreadyHardUserWord,
+  updateUserWord,
+} from '../../../services/userService';
 import { IWord } from '../../../types/wordTypes';
-import { update } from '../../../store/reducers/words';
+import { updateHardWords, updateLearnedWords } from '../../../store/reducers/wordsReducer';
 
 interface IProps {
   isHardUnit: boolean;
@@ -38,13 +44,25 @@ function WordCard({ isHardUnit, wordObject }: IProps): JSX.Element {
   const rightExample = deleteTags(textExample);
   const ruRightWord = firtsLetterToUpperCase(wordTranslate);
   const [lang, setLang] = useState('en');
-  const isAuth = useAppSelector((state) => state.users.loggedIn);
   const [isHardPainted, setIsHardPainted] = useState(false);
   const [isLearned, setIsLearned] = useState(false);
-  const hardWords = useAppSelector((state) => state.words.hardWords);
+  const [cardClasses, setCardClasses] = useState([cl.container].join(' '));
   const dispatch = useAppDispatch();
+  const isAuth = useAppSelector((state) => state.users.loggedIn);
+  const hardWords = useAppSelector((state) => state.words.hardWords);
+  const learnedWords = useAppSelector((state) => state.words.learnedWords);
 
-  function checkIsAlreadyHard() {
+  useEffect(() => {
+    if (isLearned && !isHardUnit) {
+      setCardClasses([cl.container, cl.learnedWord].join(' '));
+    } else if (isHardPainted || isHardUnit) {
+      setCardClasses([cl.container, cl.hardWord].join(' '));
+    } else {
+      setCardClasses([cl.container].join(' '));
+    }
+  }, [isLearned, isHardUnit, isHardPainted]);
+
+  function checkIsAlreadyHard(): void {
     hardWords.forEach((item) => {
       if (item._id === wordObject.id) {
         setIsHardPainted(true);
@@ -52,17 +70,31 @@ function WordCard({ isHardUnit, wordObject }: IProps): JSX.Element {
     });
   }
 
+  function checkIsAlreadyLearned(): void {
+    learnedWords.forEach((item) => {
+      if (item._id === wordObject.id) {
+        setIsLearned(true);
+      }
+    });
+  }
+
   useEffect(() => {
     if (!isAuth) {
       setIsHardPainted(false);
+      setIsLearned(false);
     } else {
       checkIsAlreadyHard();
+      checkIsAlreadyLearned();
     }
   }, [isAuth]);
 
   useEffect(() => {
     setTimeout(() => checkIsAlreadyHard(), 1500);
   }, [hardWords]);
+
+  useEffect(() => {
+    setTimeout(() => checkIsAlreadyLearned(), 1500);
+  }, [learnedWords]);
 
   const audioUrl = [`${config.apiUrl}/${audio}`, `${config.apiUrl}/${audioMeaning}`, `${config.apiUrl}/${audioExample}`];
   let currentAudioNum = 0;
@@ -84,8 +116,6 @@ function WordCard({ isHardUnit, wordObject }: IProps): JSX.Element {
 
     currentAudio.addEventListener('ended', () => playWordCard());
   }
-
-  const [cardClasses, setCardClasses] = useState([cl.container].join(' '));
 
   return (
     <div className={cardClasses}>
@@ -116,14 +146,39 @@ function WordCard({ isHardUnit, wordObject }: IProps): JSX.Element {
               }
               type="button"
               disabled={!isAuth}
-              onClick={() => {
+              onClick={async () => {
                 if (isLearned) {
-                  setCardClasses([cl.container].join(' '));
                   setIsLearned(false);
+                  await updateUserWord(JSON.parse(localStorage.getItem('userData') as string).userId, id, {
+                    difficulty: 'easy',
+                    optional: { isLearned: false },
+                  });
                 } else {
-                  setCardClasses([cl.container, cl.learnedWord].join(' '));
                   setIsLearned(true);
+                  await updateUserWord(JSON.parse(localStorage.getItem('userData') as string).userId, id, {
+                    difficulty: 'easy',
+                    optional: { isLearned: true },
+                  });
                 }
+
+                if (isHardPainted) {
+                  setIsHardPainted(false);
+                  await updateUserWord(JSON.parse(localStorage.getItem('userData') as string).userId, id, {
+                    difficulty: 'easy',
+                    optional: { isLearned: true },
+                  });
+                }
+
+                if (isHardUnit) {
+                  setIsHardPainted(false);
+                  setIsLearned(true);
+                  await deleteHardWordInHardUnit(
+                    JSON.parse(localStorage.getItem('userData') as string).userId,
+                    wordObject._id as string,
+                  );
+                }
+                const updatedLearnedWords = await getUserLearnedWords();
+                dispatch(updateLearnedWords(updatedLearnedWords[0].paginatedResults));
               }}
             >
               <img src={isLearned ? deleteHardWordIcon : checkWordIcon} alt="check-word-btn" />
@@ -135,27 +190,24 @@ function WordCard({ isHardUnit, wordObject }: IProps): JSX.Element {
                   : [cl.btnImage, cl.hardBtn].join(' ')
               }
               type="button"
-              disabled={!isAuth}
+              disabled={!isAuth || isLearned}
               onClick={async () => {
                 if (!isHardPainted && !isHardUnit) {
                   setIsHardPainted(true);
-                  setCardClasses([cl.container, cl.hardWord].join(' '));
                   await isAlreadyHardUserWord(JSON.parse(localStorage.getItem('userData') as string).userId, id);
                 } else if (isHardPainted && !isHardUnit) {
                   setIsHardPainted(false);
-                  setCardClasses([cl.container].join(' '));
                   await isAlreadyHardUserWord(JSON.parse(localStorage.getItem('userData') as string).userId, id);
                 }
 
                 if (isHardUnit) {
-                  setIsHardPainted(false);
                   await isAlreadyHardUserWord(
                     JSON.parse(localStorage.getItem('userData') as string).userId,
                     wordObject._id as string,
                   );
                 }
                 const updatedHardWords = await getUserHardWords();
-                dispatch(update(updatedHardWords[0].paginatedResults));
+                dispatch(updateHardWords(updatedHardWords[0].paginatedResults));
               }}
             >
               <img src={isHardPainted || isHardUnit ? deleteHardWordIcon : hardWordIcon} alt="add-word-to-hard-btn" />

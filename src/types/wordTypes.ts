@@ -18,6 +18,9 @@ export interface IWord {
 
 interface IUserWordObject {
   difficuly: 'hard' | 'easy';
+  optional: {
+    isLearned: true | false;
+  };
 }
 
 export interface IUserWord {
@@ -44,6 +47,9 @@ export interface IUserWordData {
   wordId: string;
 }
 
-export interface IHardWordsState {
+export type TCommonUserWord = Omit<IWord & IUserWord, 'id'>;
+
+export interface IWordsState {
   hardWords: IWord[];
+  learnedWords: TCommonUserWord[];
 }
