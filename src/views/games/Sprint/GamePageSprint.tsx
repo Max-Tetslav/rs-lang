@@ -4,7 +4,6 @@ import PreLoadingGame from '../../../components/UI/preLoadingGame/PreLoadingGame
 import Results from '../../../components/UI/results/Results';
 import { getWords } from '../../../services/userService';
 import { IWord } from '../../../types/wordTypes';
-import { PAGE_NUMBER } from '../../../utils/constants/gamesConstants';
 import { useAppSelector } from '../../../utils/helpers/appHooks';
 import cl from './GamePageSprint.module.scss';
 

@@ -15,8 +15,7 @@ import cl from './SprintContent.module.scss';
 import SprintWords from '../../UI/sprintWords/SprintWords';
 import SprintBonus from '../../UI/sprintBonus/SprintBonus';
 import SprintHeader from '../../UI/sprintHeader/SprintHeader';
-import { updatePage } from '../../../store/reducers/gameReducer';
-import { useAppDispatch, useAppSelector } from '../../../utils/helpers/appHooks';
+import { useAppSelector } from '../../../utils/helpers/appHooks';
 
 interface IProps {
   setGameRightAnswers: React.Dispatch<React.SetStateAction<(IWord | null)[]>>;
@@ -53,8 +52,6 @@ function SprintContent({
   const [changePage, setChangePage] = useState(false);
   const [seriesOfAnswers, setSeriesOfAnswers] = useState<number>(1);
   const [page, setPage] = useState(useAppSelector((state) => state.games.page) + 1);
-
-  const dispatch = useAppDispatch();
 
   const getRandomWord = () => {
     return words[Math.floor(Math.random() * words.length)];
