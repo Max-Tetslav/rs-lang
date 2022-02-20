@@ -134,15 +134,21 @@ function AudioCallContent({
 
   return (
     <div className={cl.gameContainer}>
-      {!isDataLoaded ? <LoadingWordList /> : <AudioCallInfo hasAnswer={hasAnswer} word={word} />}
-      <Answers
-        handleAnswerClick={handleAnswerClick}
-        handleNextWordClick={handleNextWordClick}
-        variantsAnswers={variantsAnswers}
-        hasAnswer={hasAnswer}
-        rightAnswer={rightAnswer.toString()}
-        answerWord={answerWord.toString()}
-      />
+      {!isDataLoaded ? (
+        <LoadingWordList />
+      ) : (
+        <>
+          <AudioCallInfo hasAnswer={hasAnswer} word={word} />
+          <Answers
+            handleAnswerClick={handleAnswerClick}
+            handleNextWordClick={handleNextWordClick}
+            variantsAnswers={variantsAnswers}
+            hasAnswer={hasAnswer}
+            rightAnswer={rightAnswer.toString()}
+            answerWord={answerWord.toString()}
+          />
+        </>
+      )}
     </div>
   );
 }
