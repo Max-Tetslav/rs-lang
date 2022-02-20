@@ -1,4 +1,4 @@
-import React, { JSXElementConstructor } from 'react';
+import React from 'react';
 import cl from './SprintBonus.module.scss';
 
 interface IProps {
