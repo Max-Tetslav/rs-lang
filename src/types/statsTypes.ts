@@ -1,11 +1,15 @@
 export interface IStatsGame {
+  userID: string;
   nameGame: string;
-  day: Date;
+  day: number;
+  month: number;
+  year: number;
   wordsTrue: number;
   wordsFalse: number;
   seriesTrueAnswers: number;
 }
 
 export interface StatsState {
-  statistics: IStatsGame[];
+  learnedWords: number;
+  optional: IStatsGame[];
 }
