@@ -17,6 +17,7 @@ import cl from './SprintContent.module.scss';
 import SprintWords from '../../UI/sprintWords/SprintWords';
 import SprintBonus from '../../UI/sprintBonus/SprintBonus';
 import SprintHeader from '../../UI/sprintHeader/SprintHeader';
+import getRandomPageNum from '../../../utils/helpers/getRandomPageNum';
 
 interface IProps {
   setGameRightAnswers: React.Dispatch<React.SetStateAction<(IWord | null)[]>>;
@@ -113,7 +114,7 @@ function SprintContent({
 
   useEffect(() => {
     if (changePage) {
-      getWords(Math.floor(Math.random() * PAGE_NUMBER), level).then((data) => {
+      getWords(getRandomPageNum(), level).then((data) => {
         setWords(data);
         setIndex(0);
         setIsDataLoaded(true);

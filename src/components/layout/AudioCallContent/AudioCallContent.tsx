@@ -7,6 +7,7 @@ import { IWord } from '../../../types/wordTypes';
 import { PAGE_NUMBER } from '../../../utils/constants/gamesConstants';
 import playEnglishWord from '../../../utils/helpers/playEnglishWord';
 import cl from './AudioCallContent.module.scss';
+import getRandomPageNum from '../../../utils/helpers/getRandomPageNum';
 
 interface IProps {
   setGameRightAnswers: React.Dispatch<React.SetStateAction<(IWord | null)[]>>;
@@ -51,7 +52,7 @@ function AudioCallContent({ setGameRightAnswers, setGameWrongAnswers, setIsResul
   };
 
   useEffect(() => {
-    getWords(Math.floor(Math.random() * PAGE_NUMBER), level).then((data) => {
+    getWords(getRandomPageNum(), level).then((data) => {
       setWords(data);
       setIsDataLoaded(true);
     });
