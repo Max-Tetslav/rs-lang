@@ -16,7 +16,7 @@ function WordsList({ words, setPageNum, isHard }: IProps): JSX.Element {
       {words.length ? (
         <>
           {words.map((item) => (
-            <WordCard key={item.id} wordObject={item} isHardUnit={isHard} />
+            <WordCard key={item.id || item._id} wordObject={item} isHardUnit={isHard} />
           ))}
           {isHard ? null : <Pagination setPage={setPageNum} />}
         </>

@@ -1,5 +1,6 @@
+import { update } from '../store/reducers/pageTitleReducer';
 import { ILogin, IRequest, IUser } from '../types/userTypes';
-import { IWord } from '../types/wordTypes';
+import { IUserWordData, IWord } from '../types/wordTypes';
 import config from '../utils/config';
 import authHeader from '../utils/helpers/authHeader';
 
@@ -45,17 +46,8 @@ export const getNewUserToken = async (id: string) => {
   return fetch(`${config.apiUrl}/users/${id}/tokens`, setRequest());
 };
 
-export async function getUserWords(id: string) {
-  const request = await fetch(`${config.apiUrl}/users/${id}/words`, setRequest());
-  const response = await request.json();
-
-  return response;
-}
-
-export async function getUserHardWords(id: string): Promise<[{ paginatedResults: IWord[] }]> {
-  const querryParams = '?wordsPerPage=3600&filter=%7B%22%24and%22%3A%5B%7B%22userWord.difficulty%22%3A%22hard%22%7D%5D%7D';
-  const request = await fetch(`${config.apiUrl}/users/${id}/aggregatedWords/${querryParams}`, setRequest());
-
+export async function getUserWords(userId: string): Promise<IUserWordData[]> {
+  const request = await fetch(`${config.apiUrl}/users/${userId}/words`, setRequest());
   const response = await request.json();
 
   return response;
@@ -94,4 +86,34 @@ export async function getWords(page = 0, group = 0) {
 
 export async function getWordById(id = '5e9f5ee35eb9e72bc21af4af') {
   return fetch(`${config.apiUrl}/words/${id}`);
+}
+
+export async function getUserHardWords(): Promise<[{ paginatedResults: IWord[] }]> {
+  const authId = localStorage.getItem('userData')
+    ? (JSON.parse(localStorage.getItem('userData') as string).userId as string)
+    : '';
+  const querryParams = '?wordsPerPage=3600&filter=%7B%22%24and%22%3A%5B%7B%22userWord.difficulty%22%3A%22hard%22%7D%5D%7D';
+  const request = await fetch(`${config.apiUrl}/users/${authId}/aggregatedWords/${querryParams}`, setRequest());
+  const response = await request.json();
+
+  return response;
+}
+
+export async function isAlreadyHardUserWord(userId: string, wordId: string): Promise<void> {
+  const words = await getUserWords(userId);
+  const alreadyUserWordList = words.filter((item) => item.wordId === wordId);
+  const isWordExist = Boolean(alreadyUserWordList.length);
+  const isWordHard = Boolean(alreadyUserWordList.filter((item) => item.difficulty === 'hard').length);
+
+  if (isWordExist && isWordHard) {
+    updateUserWord(userId, wordId, { difficulty: 'easy' });
+  } else if (isWordExist && !isWordHard) {
+    updateUserWord(userId, wordId, { difficulty: 'hard' });
+  } else {
+    createUserWord(userId, wordId, { difficulty: 'hard' });
+  }
+}
+
+export async function deleteHardWordInHardUnit(userId: string, wordId: string): Promise<void> {
+  updateUserWord(userId, wordId, { difficulty: 'easy' });
 }

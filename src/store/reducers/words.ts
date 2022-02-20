@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IHardWordsState, IWord } from '../../types/wordTypes';
 
 export const initialState: IHardWordsState = {
-  hardWords: JSON.parse(localStorage.getItem('hardWords') as string) || [],
+  hardWords: [],
 };
 
 const wordsSlice = createSlice({
