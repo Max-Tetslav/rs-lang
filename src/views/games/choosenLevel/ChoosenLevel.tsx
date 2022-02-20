@@ -5,22 +5,17 @@ import cl from './ChoosenLevel.module.scss';
 import Button from '../../../components/UI/button/Button';
 import { ChosenGameProps } from '../../../types/gameTypes';
 import { useAppDispatch } from '../../../utils/helpers/appHooks';
-import { updateLevel } from '../../../store/reducers/gameReducer';
+import { setIsGameStart, updateLevel } from '../../../store/reducers/gameReducer';
 import { update } from '../../../store/reducers/pageTitleReducer';
 
 interface IProps {
   choosenGame: ChosenGameProps;
   setChoosenGame: React.Dispatch<React.SetStateAction<ChosenGameProps | null>>;
-  setIsGameStart: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const COUNT_GROUP = 6;
 
-export default function ChoosenLevel({
-  choosenGame: { gameName, gameLink },
-  setChoosenGame,
-  setIsGameStart,
-}: IProps): JSX.Element {
+export default function ChoosenLevel({ choosenGame: { gameName, gameLink }, setChoosenGame }: IProps): JSX.Element {
   const [isChosenLevel, setIsChosenLevel] = useState<boolean>(false);
   const [level, setLevel] = useState(0);
   const navigation = useNavigate();
@@ -37,7 +32,7 @@ export default function ChoosenLevel({
     if (isChosenLevel) {
       dispatch(updateLevel(level));
       navigation(gameLink);
-      setIsGameStart(true);
+      dispatch(setIsGameStart(true));
       dispatch(update(gameName));
     }
   }, [isChosenLevel, gameLink, navigation]);

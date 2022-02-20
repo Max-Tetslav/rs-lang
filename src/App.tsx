@@ -5,7 +5,7 @@ import { store } from './store/store';
 
 import TextBook from './views/textbook/TextBook';
 import Games from './views/games/Games';
-import Sprint from './views/games/sprint/GamePageSprint';
+import Sprint from './views/games/Sprint/GamePageSprint';
 import Homepage from './views/homepage/Homepage';
 import NotFound from './views/notFound/NotFound';
 import Root from './views/Root';

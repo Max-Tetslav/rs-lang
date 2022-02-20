@@ -41,7 +41,6 @@ function UpdateStatistics({ wrongAnswers, rightAnswers, seriesWords }: IProps) {
     },
   };
 
-
   const statistics: IStatsGame = {
     userID: id,
     nameGame: useAppSelector((state) => state.title.pageTitle),

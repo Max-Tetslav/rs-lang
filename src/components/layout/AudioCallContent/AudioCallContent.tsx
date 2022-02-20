@@ -4,7 +4,6 @@ import AudioCallInfo from '../../UI/audioCallInfo/AudioCallInfo';
 import LoadingWordList from '../../UI/loadingWordList/LoadingWordList';
 import { getWords } from '../../../services/userService';
 import { IWord } from '../../../types/wordTypes';
-import { PAGE_NUMBER } from '../../../utils/constants/gamesConstants';
 import playEnglishWord from '../../../utils/helpers/playEnglishWord';
 import cl from './AudioCallContent.module.scss';
 
@@ -15,6 +14,7 @@ interface IProps {
   level: number;
   seriesWords: number;
   setSeriesWords: React.Dispatch<React.SetStateAction<number>>;
+  page: number;
 }
 
 const COUNT_ANSWERS = 3;
@@ -27,6 +27,7 @@ function AudioCallContent({
   level,
   seriesWords,
   setSeriesWords,
+  page,
 }: IProps): JSX.Element {
   const [words, setWords] = useState<IWord[] | []>([]);
   const [word, setWord] = useState<IWord | null>(null);
@@ -61,7 +62,7 @@ function AudioCallContent({
   };
 
   useEffect(() => {
-    getWords(Math.floor(Math.random() * PAGE_NUMBER), level).then((data) => {
+    getWords(page, level).then((data) => {
       setWords(data);
       setIsDataLoaded(true);
     });

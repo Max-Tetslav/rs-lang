@@ -4,6 +4,8 @@ import cl from './MenuItem.module.scss';
 import { update } from '../../../store/reducers/pageTitleReducer';
 import { useAppDispatch } from '../../../utils/helpers/appHooks';
 import getPageTitle from '../../../utils/helpers/getPageTitle';
+import { EPageUrls } from '../../../types/pageTitleTypes';
+import { updateLevel, updatePage } from '../../../store/reducers/gameReducer';
 
 interface IProps {
   icon: string;
@@ -29,6 +31,10 @@ function MenuItem({ icon, alt, href }: IProps): JSX.Element {
       <Link
         to={href}
         onClick={() => {
+          if (href === EPageUrls.book) {
+            dispatch(updateLevel(0));
+            dispatch(updatePage(0));
+          }
           dispatch(update(getPageTitle(href)));
         }}
       >
