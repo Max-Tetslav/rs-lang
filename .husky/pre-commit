@@ -1,4 +1,0 @@
-#!/bin/sh
-. "$(dirname "$0")/root/husky.sh"
-
-npx lint-staged
