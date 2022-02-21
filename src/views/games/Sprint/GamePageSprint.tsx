@@ -15,6 +15,7 @@ export default function Sprint(): JSX.Element {
   const [isResultsShow, setIsResultsShow] = useState(false);
   const [preLoading, setPreLoading] = useState<number>(3);
   const [words, setWords] = useState<IWord[] | []>([]);
+  const [seriesWords, setSeriesWords] = useState(0);
 
   useEffect(() => {
     getWords(page, level).then((data) => {
@@ -43,6 +44,8 @@ export default function Sprint(): JSX.Element {
           setGameWrongAnswers={setGameWrongAnswers}
           words={words}
           setWords={setWords}
+          seriesWords={seriesWords}
+          setSeriesWords={setSeriesWords}
         />
       )}
       {isResultsShow ? (
@@ -52,6 +55,7 @@ export default function Sprint(): JSX.Element {
           wrongAnswers={gameWrongAnswers}
           setRightAnswers={setGameRightAnswers}
           setWrongAnswers={setGameWrongAnswers}
+          seriesWords={seriesWords}
         />
       ) : (
         ''

@@ -8,17 +8,20 @@ interface IProps {
   words: IWord[];
   setPageNum: React.Dispatch<React.SetStateAction<number>>;
   isHard: boolean;
+  currentPage: number;
 }
 
-function WordsList({ words, setPageNum, isHard }: IProps): JSX.Element {
+function WordsList({ words, setPageNum, isHard, currentPage }: IProps): JSX.Element {
   return (
     <div className={cl.wordsContainer}>
       {words.length ? (
         <>
           {words.map((item) => (
-            <WordCard key={item.id} wordObject={item} isHardUnit={isHard} />
+            <WordCard key={item.id || item._id} wordObject={item} isHardUnit={isHard} />
           ))}
-          {isHard ? null : <Pagination setPage={setPageNum} />}
+          {isHard ? null : (
+            <Pagination currentPage={currentPage + 1} onPageChange={setPageNum} totalCount={600} siblingCount={2} pageSize={20} />
+          )}
         </>
       ) : (
         <h1>Нет слов</h1>

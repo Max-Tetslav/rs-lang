@@ -16,6 +16,8 @@ import SprintWords from '../../UI/sprintWords/SprintWords';
 import SprintBonus from '../../UI/sprintBonus/SprintBonus';
 import SprintHeader from '../../UI/sprintHeader/SprintHeader';
 import { useAppSelector } from '../../../utils/helpers/appHooks';
+import right from '../../../assets/audio/right.mp3';
+import wrong from '../../../assets/audio/wrong.mp3';
 
 interface IProps {
   setGameRightAnswers: React.Dispatch<React.SetStateAction<(IWord | null)[]>>;
@@ -24,6 +26,8 @@ interface IProps {
   level: number;
   words: Array<IWord>;
   setWords: React.Dispatch<React.SetStateAction<IWord[]>>;
+  seriesWords: number;
+  setSeriesWords: React.Dispatch<React.SetStateAction<number>>;
 }
 
 interface IAnswers {
@@ -37,6 +41,8 @@ function SprintContent({
   level,
   words,
   setWords,
+  seriesWords,
+  setSeriesWords,
 }: IProps): JSX.Element {
   const [value, setValue] = useState<number>(60);
   const [score, setscore] = useState<number>(0);
@@ -52,6 +58,7 @@ function SprintContent({
   const [changePage, setChangePage] = useState(false);
   const [seriesOfAnswers, setSeriesOfAnswers] = useState<number>(1);
   const [page, setPage] = useState(useAppSelector((state) => state.games.page) + 1);
+  const [series, setSeries] = useState(0);
 
   const getRandomWord = () => {
     return words[Math.floor(Math.random() * words.length)];
@@ -75,8 +82,12 @@ function SprintContent({
   const checkAnswer = (flag: boolean) => {
     if (index < words.length - 1) {
       if ((word?.wordTranslate === answerWord) === flag) {
+        const rightAudio = new Audio();
+        rightAudio.src = right;
+        rightAudio.play();
         setHasAnswer(true);
         setGameRightAnswers((prev) => [...prev, word]);
+        setSeries(series + 1);
         if (countRightAnswers < MAX_RIGHT_ANSWER) {
           if (bonus === MAX_BONUS) {
             setCountRightAnswers(1);
@@ -87,17 +98,27 @@ function SprintContent({
           setCountRightAnswers(1);
         }
       } else {
+        const wrongAudio = new Audio();
+        wrongAudio.src = wrong;
+        wrongAudio.play();
         setGameWrongAnswers((prev) => [...prev, word]);
         setCountRightAnswers(0);
         setSeriesOfAnswers(1);
         setBonus(1);
         setHasAnswer(false);
+        if (seriesWords < series) {
+          setSeriesWords(series);
+          setSeries(0);
+        } else {
+          setSeries(0);
+        }
       }
       setIndex(index + 1);
     } else {
       setChangePage(true);
     }
   };
+
   useEffect(() => {
     const timer = setInterval(() => setValue((prev) => prev - 1), 1000);
     return () => {
@@ -108,6 +129,12 @@ function SprintContent({
   useEffect(() => {
     if (value <= 0) {
       setIsResultsShow(true);
+      if (seriesWords < series) {
+        setSeriesWords(series);
+      }
+    }
+    if (value === 0) {
+      setValue(0);
     }
   }, [value]);
 
@@ -129,7 +156,7 @@ function SprintContent({
 
   useEffect(() => {
     if (isDataLoaded) {
-      setAnswerWord(answers![index][Math.floor(Math.random() * 2)]);
+      setAnswerWord((answers as IAnswers)[index][Math.floor(Math.random() * 2)]);
       setWord(words[index]);
       setIsDataLoaded(false);
     }
@@ -143,7 +170,7 @@ function SprintContent({
 
   useEffect(() => {
     if (index < words.length && index !== 0) {
-      setAnswerWord(answers![index][Math.floor(Math.random() * 2)]);
+      setAnswerWord((answers as IAnswers)[index][Math.floor(Math.random() * 2)]);
       setWord(words[index]);
     }
   }, [index]);
@@ -151,7 +178,7 @@ function SprintContent({
   useEffect(() => {
     if (countRightAnswers === MAX_RIGHT_ANSWER) {
       setBonus(bonus * INCREASE_BONUS);
-      if (seriesOfAnswers !== SERIES_OF_ANSWER) {
+      if (seriesOfAnswers <= SERIES_OF_ANSWER) {
         setSeriesOfAnswers(seriesOfAnswers + 1);
       }
       createItemsBonus(0);
@@ -166,6 +193,22 @@ function SprintContent({
       setHasAnswer(false);
     }
   }, [hasAnswer]);
+
+  const clickKeysHandler = (event: KeyboardEvent) => {
+    if (event.code === 'ArrowLeft') {
+      checkAnswer(true);
+    }
+    if (event.code === 'ArrowRight') {
+      checkAnswer(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('keydown', clickKeysHandler);
+    return () => {
+      window.removeEventListener('keydown', clickKeysHandler);
+    };
+  });
 
   return (
     <div className={cl.container}>

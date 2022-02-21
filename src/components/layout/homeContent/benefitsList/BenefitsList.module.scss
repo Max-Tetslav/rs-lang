@@ -1,6 +1,16 @@
 .cardList {
+  margin-top: 30px;
   display: flex;
   justify-content: space-between;
+  column-gap: 30px;
+  row-gap: 30px;
+  flex-wrap: wrap;
   align-items: center;
   width: 100%;
+}
+
+@media (max-width: 1054px) {
+  .cardList {
+    justify-content: space-around;
+  }
 }
