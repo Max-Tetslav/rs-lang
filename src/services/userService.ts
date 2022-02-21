@@ -42,7 +42,17 @@ export async function deleteUser(id: string) {
 }
 
 export const getNewUserToken = async (id: string) => {
-  return fetch(`${config.apiUrl}/users/${id}/tokens`, setRequest());
+  const refreshToken = localStorage.getItem('userData')
+    ? JSON.parse(localStorage.getItem('userData') as string).refreshToken
+    : '';
+  return fetch(`${config.apiUrl}/users/${id}/tokens`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${refreshToken}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  });
 };
 
 export async function getUserWords(userId: string): Promise<IUserWordData[]> {

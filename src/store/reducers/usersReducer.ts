@@ -39,6 +39,11 @@ export const userSlice = createSlice({
     userLoading(state, action: PayloadAction<boolean>) {
       state.isLoading = action.payload ?? false;
     },
+    userUpdate(state, action: PayloadAction<UserState>) {
+      state.user = action.payload.user;
+      state.loggedIn = action.payload.loggedIn;
+      state.isLoading = action.payload.isLoading;
+    },
     userLogout(state) {
       state.user = initState.user;
       state.loggedIn = initState.loggedIn;
@@ -49,4 +54,4 @@ export const userSlice = createSlice({
 
 const { actions, reducer } = userSlice;
 export default reducer;
-export const { userSignin, userLoading, userLogout } = actions;
+export const { userSignin, userLoading, userUpdate, userLogout } = actions;

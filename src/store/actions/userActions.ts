@@ -1,7 +1,7 @@
-import { authUser, loginUser } from '../../services/userService';
-import { ILogin, IUser } from '../../types/userTypes';
+import { authUser, getNewUserToken, getUser, loginUser } from '../../services/userService';
+import { ILogin, IUser, UserState } from '../../types/userTypes';
 import { AppDispatch } from '../store';
-import { userSignin, userLoading, userLogout } from '../reducers/usersReducer';
+import { userSignin, userLoading, userLogout, userUpdate } from '../reducers/usersReducer';
 
 export const signIn = (user: ILogin, isLoading = false) => {
   return async (dispatch: AppDispatch) => {
@@ -38,5 +38,39 @@ export const logout = () => {
       throw new Error(`Logout error ${e}`);
     }
     dispatch(userLogout());
+  };
+};
+
+export const checkToken = () => {
+  return async (dispatch: AppDispatch) => {
+    const userId = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData') as string).userId : '';
+    const tryRequest = await getUser(userId);
+    if (tryRequest.status === 401) {
+      const newToken = await getNewUserToken(userId);
+      if (newToken.status === 403) {
+        dispatch(userLogout());
+        return false;
+      }
+      if (newToken.ok) {
+        const newUserToken = await newToken.json();
+        const userData = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData') as string) : '';
+        const newUser = {
+          message: userData.message,
+          token: newUserToken.token,
+          refreshToken: newUserToken.refreshToken,
+          userId: userData.userId,
+          name: userData.name,
+        };
+        localStorage.setItem('userData', JSON.stringify(newUser));
+        const newUserState: UserState = {
+          user: newUser,
+          loggedIn: true,
+          isLoading: false,
+        };
+        dispatch(userUpdate(newUserState));
+        return true;
+      }
+    }
+    return true;
   };
 };
