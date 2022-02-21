@@ -1,18 +1,18 @@
-import audioImg from '../../assets/images/audio.png';
-import sprintImg from '../../assets/images/sprint.png';
+import audioSvg from '../../assets/svg/sound.svg';
+import sprintSvg from '../../assets/svg/sprint.svg';
 
 export const GAMES = [
   {
     name: 'Спринт',
     description: 'Выберите соответсвует ли перевод предложенному слову',
     link: 'sprint',
-    background: sprintImg,
+    background: sprintSvg,
   },
   {
     name: 'Аудиовызов',
     description: 'Выберите перевод услышанного слова',
     link: 'audiocall',
-    background: audioImg,
+    background: audioSvg,
   },
 ];
 

@@ -31,7 +31,14 @@ function Games(): JSX.Element {
           {!choosenGame && (
             <div className={cl.GameCardsContainer}>
               {GAMES.map(({ name, link, background, description }) => (
-                <GameCard name={name} link={link} img={background} description={description} setChoosenGame={setChoosenGame} />
+                <GameCard
+                  key={link}
+                  name={name}
+                  link={link}
+                  img={background}
+                  description={description}
+                  setChoosenGame={setChoosenGame}
+                />
               ))}
             </div>
           )}
