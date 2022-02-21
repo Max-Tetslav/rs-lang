@@ -48,7 +48,7 @@ function Results({
   };
 
   dispatch(addStats(statistics));
-  const st = useAppSelector((state) => state.stats.optional);
+  const st = useAppSelector((state) => state.stats.statistics);
   localStorage.setItem('statistics', JSON.stringify(st));
 
   return (
