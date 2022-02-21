@@ -9,7 +9,18 @@ export interface IStatsGame {
   seriesTrueAnswers: number;
 }
 
+export interface IServiseStats {
+  newWords: number;
+  day: number;
+  month: number;
+  year: number;
+  wordsTrue: number;
+  wordsFalse: number;
+  seriesTrueAnswers: number;
+}
+
 export interface StatsState {
   learnedWords: number;
-  optional: IStatsGame[];
+  statistics: IStatsGame[];
+  // optional: IServiseStats;
 }

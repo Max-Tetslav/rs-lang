@@ -15,8 +15,7 @@ import cl from './SprintContent.module.scss';
 import SprintWords from '../../UI/sprintWords/SprintWords';
 import SprintBonus from '../../UI/sprintBonus/SprintBonus';
 import SprintHeader from '../../UI/sprintHeader/SprintHeader';
-import { updatePage } from '../../../store/reducers/gameReducer';
-import { useAppDispatch, useAppSelector } from '../../../utils/helpers/appHooks';
+import { useAppSelector } from '../../../utils/helpers/appHooks';
 
 interface IProps {
   setGameRightAnswers: React.Dispatch<React.SetStateAction<(IWord | null)[]>>;
@@ -58,8 +57,6 @@ function SprintContent({
   const [seriesOfAnswers, setSeriesOfAnswers] = useState<number>(1);
   const [page, setPage] = useState(useAppSelector((state) => state.games.page) + 1);
   const [series, setSeries] = useState(0);
-
-  const dispatch = useAppDispatch();
 
   const getRandomWord = () => {
     return words[Math.floor(Math.random() * words.length)];
@@ -147,7 +144,7 @@ function SprintContent({
 
   useEffect(() => {
     if (isDataLoaded) {
-      setAnswerWord(answers![index][Math.floor(Math.random() * 2)]);
+      setAnswerWord((answers as IAnswers)[index][Math.floor(Math.random() * 2)]);
       setWord(words[index]);
       setIsDataLoaded(false);
     }
@@ -161,7 +158,7 @@ function SprintContent({
 
   useEffect(() => {
     if (index < words.length && index !== 0) {
-      setAnswerWord(answers![index][Math.floor(Math.random() * 2)]);
+      setAnswerWord((answers as IAnswers)[index][Math.floor(Math.random() * 2)]);
       setWord(words[index]);
     }
   }, [index]);

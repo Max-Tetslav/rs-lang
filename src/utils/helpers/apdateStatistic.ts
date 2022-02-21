@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getUserStatistic, updateUserStatistic } from '../../services/userService';
 import { addStats } from '../../store/reducers/statsReduser';
-import { IStatsGame } from '../../types/statsTypes';
+import { IServiseStats, IStatsGame } from '../../types/statsTypes';
 import { IWord } from '../../types/wordTypes';
 import { useAppDispatch, useAppSelector } from './appHooks';
 
@@ -16,6 +16,20 @@ function UpdateStatistics({ wrongAnswers, rightAnswers, seriesWords }: IProps) {
   const id = useAppSelector((state) => state.users.user.userId);
   const today = new Date();
   const [day, month, year] = [today.getDay(), today.getMonth(), today.getFullYear()];
+  const [a, setA] = useState<IServiseStats | {}>({});
+  const [s, setS] = useState<IServiseStats | {}>({});
+
+  const storageData = getUserStatistic(id);
+  console.log(storageData);
+  useEffect(() => {
+    if (id) {
+      storageData.then((e) => {
+        setA(e.optional.audiocall);
+        setS(e.optional.sprint);
+        console.log(a, s);
+      });
+    }
+  }, [id]);
 
   const stats = {
     learnedWords: 0,
@@ -61,7 +75,7 @@ function UpdateStatistics({ wrongAnswers, rightAnswers, seriesWords }: IProps) {
 
   setTimeout(() => {
     updateUserStatistic(id, stats);
-  }, 1000);
+  }, 1500);
 }
 
 export default UpdateStatistics;

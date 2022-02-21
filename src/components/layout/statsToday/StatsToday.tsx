@@ -8,7 +8,7 @@ function StatsToday() {
   const statistics = useAppSelector((state) => {
     const today = new Date();
     const [day, month, year] = [today.getDay(), today.getMonth(), today.getFullYear()];
-    return state.stats.optional.filter(
+    return state.stats.statistics.filter(
       (game) => game.day === day && game.month === month && game.year === year && game.userID === id,
     );
   });
