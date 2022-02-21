@@ -36,20 +36,20 @@ function Results({
   //   if (authId) {
   //   }
   // }, [authId]);
-  // const statistics: IStatsGame = {
-  //   userID: useAppSelector((state) => state.users.user.userId),
-  //   nameGame: useAppSelector((state) => state.title.pageTitle),
-  //   day: today.getDay(),
-  //   month: today.getMonth(),
-  //   year: today.getFullYear(),
-  //   wordsTrue: rightAnswers.length,
-  //   wordsFalse: wrongAnswers.length,
-  //   seriesTrueAnswers: seriesWords,
-  // };
+  const statistics: IStatsGame = {
+    userID: useAppSelector((state) => state.users.user.userId),
+    nameGame: useAppSelector((state) => state.title.pageTitle),
+    day: today.getDay(),
+    month: today.getMonth(),
+    year: today.getFullYear(),
+    wordsTrue: rightAnswers.length,
+    wordsFalse: wrongAnswers.length,
+    seriesTrueAnswers: seriesWords,
+  };
 
-  // dispatch(addStats(statistics));
-  // const st = useAppSelector((state) => state.stats.optional);
-  // localStorage.setItem('statistics', JSON.stringify(st));
+  dispatch(addStats(statistics));
+  const st = useAppSelector((state) => state.stats.optional);
+  localStorage.setItem('statistics', JSON.stringify(st));
 
   return (
     <div className={cl.wrapper}>
