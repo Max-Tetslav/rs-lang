@@ -13,7 +13,7 @@ function BenefitsList(): JSX.Element {
       <BenefitCard
         icon={studentSvg}
         iconAlt="student-icon"
-        title="Любой уровень: от нуля до продвинутого"
+        title="Слова разделены по уровню сложности"
         content="Учебник состоит из 6 модулей, независимо от вашего уровня, вы найдете материал, который подходит именно вам"
       />
       <BenefitCard
@@ -25,7 +25,7 @@ function BenefitsList(): JSX.Element {
       <BenefitCard
         icon={stonksSvg}
         iconAlt="stonks-icon"
-        title="Возможность отследить прогресс"
+        title="Краткосрочная статистика"
         content="Авторизированным пользователям доступна возможность следить за прогрессом обучения, а также статистика результатов в мини-играх"
       />
       <BenefitCard
