@@ -81,6 +81,7 @@
 
   &:disabled {
     border-color: lightgray;
+    cursor: not-allowed;
 
     &:hover {
       background-color: white;

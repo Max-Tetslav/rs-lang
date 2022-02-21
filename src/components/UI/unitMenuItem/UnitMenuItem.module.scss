@@ -6,7 +6,9 @@
   font-size: 24px;
   color: #007bff;
   transition: all 0.3s ease;
-  &:hover {
+  &:hover,
+  &:active,
+  &.paintedBtn {
     background-color: #4dabf5;
     color: white;
   }
