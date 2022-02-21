@@ -27,7 +27,7 @@ function MenuItem({ icon, alt, href }: IProps): JSX.Element {
   }, [location, isActive]);
 
   return (
-    <li className={isActive === true ? [cl.menuItem, cl.paintedMenuItem].join(' ') : [cl.menuItem].join(' ')}>
+    <li className={isActive ? [cl.menuItem, cl.paintedMenuItem].join(' ') : [cl.menuItem].join(' ')}>
       <Link
         to={href}
         onClick={() => {
