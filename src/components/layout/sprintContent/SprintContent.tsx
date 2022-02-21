@@ -98,6 +98,7 @@ function SprintContent({
       setChangePage(true);
     }
   };
+
   useEffect(() => {
     const timer = setInterval(() => setValue((prev) => prev - 1), 1000);
     return () => {
@@ -108,6 +109,9 @@ function SprintContent({
   useEffect(() => {
     if (value <= 0) {
       setIsResultsShow(true);
+    }
+    if (value === 0) {
+      setValue(0);
     }
   }, [value]);
 
@@ -151,7 +155,7 @@ function SprintContent({
   useEffect(() => {
     if (countRightAnswers === MAX_RIGHT_ANSWER) {
       setBonus(bonus * INCREASE_BONUS);
-      if (seriesOfAnswers !== SERIES_OF_ANSWER) {
+      if (seriesOfAnswers <= SERIES_OF_ANSWER) {
         setSeriesOfAnswers(seriesOfAnswers + 1);
       }
       createItemsBonus(0);
@@ -166,6 +170,22 @@ function SprintContent({
       setHasAnswer(false);
     }
   }, [hasAnswer]);
+
+  const clickKeysHandler = (event: KeyboardEvent) => {
+    if (event.code === 'ArrowLeft') {
+      checkAnswer(true);
+    }
+    if (event.code === 'ArrowRight') {
+      checkAnswer(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('keydown', clickKeysHandler);
+    return () => {
+      window.removeEventListener('keydown', clickKeysHandler);
+    };
+  });
 
   return (
     <div className={cl.container}>
