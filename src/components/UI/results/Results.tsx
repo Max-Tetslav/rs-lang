@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IWord } from '../../../types/wordTypes';
 import playEnglishWord from '../../../utils/helpers/playEnglishWord';
@@ -8,7 +8,6 @@ import Button from '../button/Button';
 import { IStatsGame } from '../../../types/statsTypes';
 import { useAppDispatch, useAppSelector } from '../../../utils/helpers/appHooks';
 import { addStats } from '../../../store/reducers/statsReduser';
-import UpdateStatistics from '../../../utils/helpers/apdateStatistic';
 
 interface IProps {
   setIsResultsShow: (isResultsShow: boolean) => void;
@@ -30,26 +29,25 @@ function Results({
   const navigation = useNavigate();
   const dispatch = useAppDispatch();
   const today = new Date();
-  // UpdateStatistics({ wrongAnswers: wrongAnswers, rightAnswers: rightAnswers, seriesWords: seriesWords });
-  // const authId = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData') as string).userId : '';
-  // useEffect(() => {
-  //   if (authId) {
-  //   }
-  // }, [authId]);
-  const statistics: IStatsGame = {
-    userID: useAppSelector((state) => state.users.user.userId),
-    nameGame: useAppSelector((state) => state.title.pageTitle),
-    day: today.getDay(),
-    month: today.getMonth(),
-    year: today.getFullYear(),
-    wordsTrue: rightAnswers.length,
-    wordsFalse: wrongAnswers.length,
-    seriesTrueAnswers: seriesWords,
-  };
+  const nameGameResult = useAppSelector((state) => state.title.pageTitle);
+  const isAuth = useAppSelector((state) => state.users.loggedIn);
 
-  dispatch(addStats(statistics));
-  const st = useAppSelector((state) => state.stats.statistics);
-  localStorage.setItem('statistics', JSON.stringify(st));
+  if (isAuth) {
+    const statistics: IStatsGame = {
+      userID: useAppSelector((state) => state.users.user.userId),
+      nameGame: nameGameResult,
+      day: today.getDay(),
+      month: today.getMonth(),
+      year: today.getFullYear(),
+      wordsTrue: rightAnswers,
+      wordsFalse: wrongAnswers,
+      seriesTrueAnswers: seriesWords,
+    };
+
+    dispatch(addStats(statistics));
+    const st = useAppSelector((state) => state.stats.statistics);
+    localStorage.setItem('statistics', JSON.stringify(st));
+  }
 
   return (
     <div className={cl.wrapper}>
@@ -99,7 +97,7 @@ function Results({
                 setIsResultsShow(false);
                 setRightAnswers([]);
                 setWrongAnswers([]);
-                navigation('/games/audiocall');
+                navigation(nameGameResult === 'Аудиовызов' ? '/games/audiocall' : '/games/sprint');
               }}
             />
             <Button
