@@ -17,7 +17,7 @@ function WordsList({ words, setPageNum, isHard, currentPage }: IProps): JSX.Elem
       {words.length ? (
         <>
           {words.map((item) => (
-            <WordCard key={item.id} wordObject={item} isHardUnit={isHard} />
+            <WordCard key={item.id || item._id} wordObject={item} isHardUnit={isHard} />
           ))}
           {isHard ? null : (
             <Pagination currentPage={currentPage + 1} onPageChange={setPageNum} totalCount={600} siblingCount={2} pageSize={20} />

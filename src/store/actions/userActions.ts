@@ -33,7 +33,7 @@ export const createUser = (user: IUser) => {
 export const logout = () => {
   return async (dispatch: AppDispatch) => {
     try {
-      localStorage.setItem('userData', '{}');
+      localStorage.setItem('userData', '');
     } catch (e) {
       throw new Error(`Logout error ${e}`);
     }
