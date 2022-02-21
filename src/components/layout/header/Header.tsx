@@ -34,7 +34,7 @@ function Header({ show }: IProps) {
     <header className={cl.container}>
       <h1 className={cl.title}>{curretPageTitle}</h1>
       <div className={cl.userWrapper}>
-        <h4>{user.name}</h4>
+        <h4 className={cl.userName}>{user.name}</h4>
         {btn}
       </div>
       {isShown ? <ModalLogout isShown={isShown} hide={toggle} headerText="Подтвердите выход" /> : ''}

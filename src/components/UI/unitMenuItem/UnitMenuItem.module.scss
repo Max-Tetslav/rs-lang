@@ -3,11 +3,26 @@
   min-width: 9%;
   border-left: 1px solid #007bff;
   border-right: 1px solid #007bff;
-  font-size: 24px;
+  font-size: 1.4em;
+  line-height: 1em;
   color: #007bff;
   transition: all 0.3s ease;
   &:hover {
     background-color: #4dabf5;
     color: white;
+  }
+}
+
+@media (max-width: 1080px) {
+  .button {
+    font-size: 1em;
+    line-height: 0.6em;
+  }
+}
+
+@media (max-width: 830px) {
+  .button {
+    font-size: 0.8em;
+    line-height: 0.6em;
   }
 }
