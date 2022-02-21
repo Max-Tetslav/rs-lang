@@ -16,6 +16,8 @@ import SprintWords from '../../UI/sprintWords/SprintWords';
 import SprintBonus from '../../UI/sprintBonus/SprintBonus';
 import SprintHeader from '../../UI/sprintHeader/SprintHeader';
 import { useAppSelector } from '../../../utils/helpers/appHooks';
+import right from '../../../assets/audio/right.mp3';
+import wrong from '../../../assets/audio/wrong.mp3';
 
 interface IProps {
   setGameRightAnswers: React.Dispatch<React.SetStateAction<(IWord | null)[]>>;
@@ -75,6 +77,9 @@ function SprintContent({
   const checkAnswer = (flag: boolean) => {
     if (index < words.length - 1) {
       if ((word?.wordTranslate === answerWord) === flag) {
+        const rightAudio = new Audio();
+        rightAudio.src = right;
+        rightAudio.play();
         setHasAnswer(true);
         setGameRightAnswers((prev) => [...prev, word]);
         if (countRightAnswers < MAX_RIGHT_ANSWER) {
@@ -87,6 +92,9 @@ function SprintContent({
           setCountRightAnswers(1);
         }
       } else {
+        const wrongAudio = new Audio();
+        wrongAudio.src = wrong;
+        wrongAudio.play();
         setGameWrongAnswers((prev) => [...prev, word]);
         setCountRightAnswers(0);
         setSeriesOfAnswers(1);
