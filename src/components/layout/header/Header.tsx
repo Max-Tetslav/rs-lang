@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import { logout } from '../../../store/actions/userActions';
-import { useAppDispatch, useAppSelector } from '../../../utils/helpers/appHooks';
+import { useAppSelector } from '../../../utils/helpers/appHooks';
+import useModal from '../../../utils/helpers/useModal';
+import ModalLogout from '../modalLogout/ModalLogout';
 import cl from './Header.module.scss';
 
 interface IProps {
@@ -8,26 +9,24 @@ interface IProps {
 }
 
 function Header({ show }: IProps) {
-  const dispatch = useAppDispatch();
   const curretPageTitle = useAppSelector((state) => state.title.pageTitle);
+  const { isShown, toggle } = useModal();
 
   useEffect(() => {}, [curretPageTitle]);
 
-  const handleLogout = () => {
-    dispatch(logout());
+  const handleLogoutModal = () => {
+    toggle();
   };
 
   const loggedIn = useAppSelector((state) => state.users.loggedIn);
   const user = useAppSelector((state) => state.users.user);
   const btn = loggedIn ? (
-    <button className={cl.signIn} onClick={handleLogout} type="button">
-      {' '}
-      Выйти{' '}
+    <button className={cl.signIn} onClick={handleLogoutModal} type="button">
+      Выйти
     </button>
   ) : (
     <button className={cl.signIn} onClick={show} type="button">
-      {' '}
-      Войти{' '}
+      Войти
     </button>
   );
 
@@ -35,9 +34,10 @@ function Header({ show }: IProps) {
     <header className={cl.container}>
       <h1 className={cl.title}>{curretPageTitle}</h1>
       <div className={cl.userWrapper}>
-        <h4>{user.name}</h4>
+        <h4 className={cl.userName}>{user.name}</h4>
         {btn}
       </div>
+      {isShown ? <ModalLogout isShown={isShown} hide={toggle} headerText="Подтвердите выход" /> : ''}
     </header>
   );
 }

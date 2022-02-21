@@ -69,7 +69,9 @@ export async function deleteUserWord(id: string, wordId: string) {
 }
 
 export async function getUserStatistic(id: string) {
-  return fetch(`${config.apiUrl}/users/${id}/statistics`, setRequest());
+  const request = await fetch(`${config.apiUrl}/users/${id}/statistics`, setRequest());
+  const response = await request.json();
+  return response;
 }
 
 export async function updateUserStatistic(id: string, data = {}) {

@@ -3,7 +3,8 @@
   min-width: 12%;
   border-left: 1px solid #7c0400;
   border-right: 1px solid #7c0400;
-  font-size: 24px;
+  font-size: 1.4em;
+  line-height: 1em;
   color: #7c0400;
   transition: all 0.3s ease;
   &:hover {
@@ -13,9 +14,24 @@
   &:disabled {
     color: lightgray;
     border-color: lightgray;
+    cursor: not-allowed;
     &:hover {
       background-color: white;
       color: lightgray;
     }
+  }
+}
+
+@media (max-width: 1080px) {
+  .button {
+    font-size: 1em;
+    line-height: 0.6em;
+  }
+}
+
+@media (max-width: 830px) {
+  .button {
+    font-size: 0.8em;
+    line-height: 0.6em;
   }
 }

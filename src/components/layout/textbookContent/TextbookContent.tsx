@@ -53,7 +53,11 @@ function TextbookContent({ unitNum, page, changePage, isHardUnit }: IProps): JSX
   return (
     <section className={cl.container}>
       {wordsError && <h1>ERROR {wordsError}</h1>}
-      {isWordsLoading ? <LoadingWordList /> : <WordsList words={words} setPageNum={changePage} isHard={isHardUnit} />}
+      {isWordsLoading ? (
+        <LoadingWordList />
+      ) : (
+        <WordsList currentPage={page} words={words} setPageNum={changePage} isHard={isHardUnit} />
+      )}
     </section>
   );
 }

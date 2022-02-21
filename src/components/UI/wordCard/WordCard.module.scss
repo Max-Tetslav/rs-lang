@@ -1,7 +1,7 @@
 .container {
   width: 48%;
+  min-width: 550px;
   height: 200px;
-  margin: 10px 0;
   padding: 20px;
   border: 1px solid #007bff;
   border-radius: 20px;
@@ -68,9 +68,10 @@
 }
 
 .btnsContainer {
-  width: 40%;
+  width: 45%;
   display: flex;
-  justify-content: space-between;
+  column-gap: 5px;
+  justify-content: center;
 }
 
 .btnImage {
@@ -88,6 +89,7 @@
 
   &:disabled {
     border-color: lightgray;
+    cursor: not-allowed;
 
     &:hover {
       background-color: lightgray;
