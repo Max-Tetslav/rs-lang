@@ -1,6 +1,9 @@
 .wordsContainer {
-  min-height: 100%;
+  margin-top: 20px;
+  min-height: 80%;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  column-gap: 20px;
+  row-gap: 20px;
   flex-wrap: wrap;
 }

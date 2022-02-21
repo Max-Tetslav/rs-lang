@@ -30,7 +30,10 @@
   align-items: center;
   column-gap: 40px;
 
-  h4 {
+  .userName {
+    display: flex;
+    justify-content: end;
     margin-bottom: 0;
+    width: 200px;
   }
 }
