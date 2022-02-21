@@ -1,5 +1,13 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@assets/*": ["src/assets/*"],
+      "@components/*": ["src/components/*"],
+      "@utils/*": ["src/utils/*"],
+      "@types/*": ["src/types/*"],
+  
+    },
     "target": "es2017",
     "lib": [
       "dom",
@@ -23,5 +31,5 @@
   "include": [
     "src",
     ".d.ts",
-  ]
+  ],
 }
