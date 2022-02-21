@@ -42,7 +42,17 @@ export async function deleteUser(id: string) {
 }
 
 export const getNewUserToken = async (id: string) => {
-  return fetch(`${config.apiUrl}/users/${id}/tokens`, setRequest());
+  const refreshToken = localStorage.getItem('userData')
+    ? JSON.parse(localStorage.getItem('userData') as string).refreshToken
+    : '';
+  return fetch(`${config.apiUrl}/users/${id}/tokens`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${refreshToken}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  });
 };
 
 export async function getUserWords(id: string) {
@@ -55,7 +65,6 @@ export async function getUserWords(id: string) {
 export async function getUserHardWords(id: string): Promise<[{ paginatedResults: IWord[] }]> {
   const querryParams = '?wordsPerPage=3600&filter=%7B%22%24and%22%3A%5B%7B%22userWord.difficulty%22%3A%22hard%22%7D%5D%7D';
   const request = await fetch(`${config.apiUrl}/users/${id}/aggregatedWords/${querryParams}`, setRequest());
-
   const response = await request.json();
 
   return response;
