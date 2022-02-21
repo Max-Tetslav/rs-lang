@@ -1,6 +1,6 @@
 .titleWrapper {
   &.title {
-    font-family: 'Roboto';
+    font-family: 'Exo 2', sans-serif;
     font-style: normal;
     font-size: 32px;
     font-weight: 700;
@@ -20,8 +20,7 @@
     flex-direction: column;
     margin: 20px 20px;
     border-radius: 30px;
-    box-shadow: 10px 10px 30px #007bffbd;
-    background: rgb(227, 242, 253);
+    border: 1px solid #007bff;
   }
   &.descriptionWrapper {
     margin-left: 16px;
@@ -43,7 +42,7 @@
 
 .description {
   &.text {
-    font-family: 'Roboto';
+    font-family: 'Exo 2', sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 20px;

@@ -2,22 +2,22 @@
   font-size: 18px;
   line-height: 21px;
   font-weight: 700;
-  color: #fafcfe;
+  color: #007bff;
 }
 
 .groupButton {
   width: 50px;
   height: 50px;
-  border: none;
+  border: 1px solid #007bff;
   border-radius: 50%;
   outline: none;
-  background-color: greenyellow;
   transition: all 0.3s ease;
-  &:hover {
-    background-color: rgba(190, 4, 4, 0.671);
-  }
-  &:active {
-    background-color: rgb(190, 4, 4);
-  }
   cursor: 'pointer';
+  &:hover,
+  &:active {
+    background-color: #4dabf5;
+    .groupNumber {
+      color: white;
+    }
+  }
 }
