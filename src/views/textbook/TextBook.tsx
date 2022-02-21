@@ -9,8 +9,8 @@ function TextBook(): JSX.Element {
   const [isHardUnit, setIsHardUnit] = useState(false);
 
   return (
-    <main className={cl.container}>
-      <UnitsMenu setCurrentUnit={setGroupNum} changePage={setPageNum} setHardUnit={setIsHardUnit} />
+    <main className={isHardUnit ? cl.hardContainer : cl.container}>
+      <UnitsMenu currentUnit={groupNum} setCurrentUnit={setGroupNum} changePage={setPageNum} setHardUnit={setIsHardUnit} />
       <TextbookContent unitNum={groupNum} page={pageNum} changePage={setPageNum} isHardUnit={isHardUnit} />
     </main>
   );

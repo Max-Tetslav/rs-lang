@@ -14,6 +14,7 @@
   &:disabled {
     color: lightgray;
     border-color: lightgray;
+    cursor: not-allowed;
     &:hover {
       background-color: white;
       color: lightgray;

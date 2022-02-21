@@ -7,3 +7,105 @@
   column-gap: 10px;
   row-gap: 10px;
 }
+
+.paginationBar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.paginationContainer {
+  height: 100px;
+  display: flex;
+  list-style-type: none;
+
+  .paginationItem {
+    box-sizing: border-box;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    margin: auto 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #007bff;
+    border-radius: 50%;
+    line-height: 1.43;
+    transition: all 0.3s ease;
+    &.dots {
+      border: none;
+    }
+
+    &:last-of-type,
+    &:first-of-type {
+      border: none;
+      background-color: transparent;
+      &:hover {
+        border: none;
+        background-color: transparent;
+      }
+
+      &.selected {
+        border: none;
+        background-color: transparent;
+      }
+    }
+
+    &.dots:hover {
+      color: black;
+      background-color: transparent;
+      cursor: default;
+    }
+
+    &:hover {
+      color: white;
+      background-color: #4dabf5;
+      cursor: pointer;
+    }
+
+    &.selected {
+      border: 1px solid #007bff;
+      color: white;
+      background-color: #4dabf5;
+    }
+
+    .arrow {
+      border: none;
+
+      &::before {
+        position: relative;
+        /* top: 3pt; Uncomment this to lower the icons as requested in comments*/
+        content: '';
+        /* By using an em scale, the arrows will size with the font */
+        display: inline-block;
+        width: 0.4em;
+        height: 0.4em;
+        border-right: 0.12em solid rgba(0, 138, 252, 0.87);
+        border-top: 0.12em solid rgba(0, 138, 252, 0.87);
+      }
+
+      &.left {
+        border: none;
+        transform: rotate(-135deg) translate(-50%);
+      }
+
+      &.right {
+        transform: rotate(45deg);
+      }
+    }
+
+    &.disabled {
+      pointer-events: none;
+
+      .arrow::before {
+        border-right: 0.12em solid rgba(0, 0, 0, 0.43);
+        border-top: 0.12em solid rgba(0, 0, 0, 0.43);
+      }
+
+      &:hover {
+        background-color: transparent;
+        cursor: not-allowed;
+      }
+    }
+  }
+}

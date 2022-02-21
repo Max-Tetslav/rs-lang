@@ -24,6 +24,8 @@ interface IProps {
   level: number;
   words: Array<IWord>;
   setWords: React.Dispatch<React.SetStateAction<IWord[]>>;
+  seriesWords: number;
+  setSeriesWords: React.Dispatch<React.SetStateAction<number>>;
 }
 
 interface IAnswers {
@@ -37,6 +39,8 @@ function SprintContent({
   level,
   words,
   setWords,
+  seriesWords,
+  setSeriesWords,
 }: IProps): JSX.Element {
   const [value, setValue] = useState<number>(60);
   const [score, setscore] = useState<number>(0);
@@ -52,6 +56,7 @@ function SprintContent({
   const [changePage, setChangePage] = useState(false);
   const [seriesOfAnswers, setSeriesOfAnswers] = useState<number>(1);
   const [page, setPage] = useState(useAppSelector((state) => state.games.page) + 1);
+  const [series, setSeries] = useState(0);
 
   const getRandomWord = () => {
     return words[Math.floor(Math.random() * words.length)];
@@ -77,6 +82,7 @@ function SprintContent({
       if ((word?.wordTranslate === answerWord) === flag) {
         setHasAnswer(true);
         setGameRightAnswers((prev) => [...prev, word]);
+        setSeries(series + 1);
         if (countRightAnswers < MAX_RIGHT_ANSWER) {
           if (bonus === MAX_BONUS) {
             setCountRightAnswers(1);
@@ -92,6 +98,12 @@ function SprintContent({
         setSeriesOfAnswers(1);
         setBonus(1);
         setHasAnswer(false);
+        if (seriesWords < series) {
+          setSeriesWords(series);
+          setSeries(0);
+        } else {
+          setSeries(0);
+        }
       }
       setIndex(index + 1);
     } else {
@@ -108,6 +120,9 @@ function SprintContent({
   useEffect(() => {
     if (value <= 0) {
       setIsResultsShow(true);
+      if (seriesWords < series) {
+        setSeriesWords(series);
+      }
     }
   }, [value]);
 
@@ -129,7 +144,7 @@ function SprintContent({
 
   useEffect(() => {
     if (isDataLoaded) {
-      setAnswerWord(answers![index][Math.floor(Math.random() * 2)]);
+      setAnswerWord((answers as IAnswers)[index][Math.floor(Math.random() * 2)]);
       setWord(words[index]);
       setIsDataLoaded(false);
     }
@@ -143,7 +158,7 @@ function SprintContent({
 
   useEffect(() => {
     if (index < words.length && index !== 0) {
-      setAnswerWord(answers![index][Math.floor(Math.random() * 2)]);
+      setAnswerWord((answers as IAnswers)[index][Math.floor(Math.random() * 2)]);
       setWord(words[index]);
     }
   }, [index]);
