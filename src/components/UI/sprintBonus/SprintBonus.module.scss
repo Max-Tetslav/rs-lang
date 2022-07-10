@@ -1,0 +1,29 @@
+.container {
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  align-items: center;
+}
+
+.bonus {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  column-gap: 20px;
+
+  &__item {
+    width: 40px;
+    height: 40px;
+    background-image: url(../../../assets//images/star.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+  }
+}
+.bonus__value {
+  font-size: 32px;
+  line-height: 39px;
+  font-weight: 700;
+  color: #1c658c;
+}

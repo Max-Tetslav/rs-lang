@@ -1,0 +1,37 @@
+.button {
+  min-height: 50px;
+  min-width: 12%;
+  border-left: 1px solid #7c0400;
+  border-right: 1px solid #7c0400;
+  font-size: 1.4em;
+  line-height: 1em;
+  color: #7c0400;
+  transition: all 0.3s ease;
+  &:hover {
+    background-color: rgba(158, 0, 0, 0.2);
+    color: #7c0400;
+  }
+  &:disabled {
+    color: lightgray;
+    border-color: lightgray;
+    cursor: not-allowed;
+    &:hover {
+      background-color: white;
+      color: lightgray;
+    }
+  }
+}
+
+@media (max-width: 1080px) {
+  .button {
+    font-size: 1em;
+    line-height: 0.6em;
+  }
+}
+
+@media (max-width: 830px) {
+  .button {
+    font-size: 0.8em;
+    line-height: 0.6em;
+  }
+}

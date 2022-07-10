@@ -1,0 +1,135 @@
+.container {
+  width: 48%;
+  min-width: 550px;
+  height: 200px;
+  padding: 20px;
+  border: 1px solid #007bff;
+  border-radius: 20px;
+  display: flex;
+  font-size: 18px;
+  color: #007bff;
+  background-color: white;
+  transition: all 0.3s ease;
+}
+
+.hardWord {
+  border-color: #ce0000;
+  background-color: rgba(243, 123, 123, 0.2);
+  img {
+    border-color: #ce0000;
+  }
+  p:nth-child(1) {
+    border-color: #ce0000;
+  }
+}
+
+.learnedWord {
+  border-color: #00af2c;
+  background-color: rgba(19, 163, 0, 0.2);
+  img {
+    border-color: #00af2c;
+  }
+  p:nth-child(1) {
+    border-color: #00af2c;
+  }
+}
+
+.image {
+  width: 20%;
+  height: 100%;
+  border: 1px solid #007bff;
+  border-radius: 10px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.textContainer {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 20px;
+}
+
+.textItemContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: black;
+
+  .mainWord {
+    margin-bottom: 0;
+    border-bottom: 1px solid #007bff;
+  }
+
+  .longTextItem {
+    font-size: 16px;
+  }
+}
+
+.btnsContainer {
+  width: 45%;
+  display: flex;
+  column-gap: 5px;
+  justify-content: center;
+}
+
+.btnImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  background-color: inherit;
+  img {
+    width: 24px;
+  }
+
+  &:disabled {
+    border-color: lightgray;
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: lightgray;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.translateBtn {
+  border: 2px solid #4dabf5;
+  &:hover {
+    background-color: #4dabf5;
+  }
+}
+
+.playBtn {
+  border: 2px solid #4dabf5;
+  &:hover {
+    background-color: #4dabf5;
+  }
+}
+
+.checkBtn {
+  border: 2px solid #00af2c;
+  &:hover {
+    background-color: #45b160;
+  }
+}
+
+.hardBtn {
+  border: 2px solid #f32b4c;
+  &:hover {
+    background-color: #f32b4c;
+  }
+}
+
+.paintHardBtn {
+  background-color: #f32b4c;
+}
+
+.paintLearnedBtn {
+  background-color: #45b160;
+}
